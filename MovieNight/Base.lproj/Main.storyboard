@@ -79,9 +79,6 @@
                                 <state key="normal" title="Tap to enter  preferences">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="BDe-He-BlJ" kind="showDetail" id="toj-MG-jQm"/>
-                                </connections>
                             </button>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="aDW-XR-Qef">
                                 <rect key="frame" x="320.66666666666669" y="194.66666666666666" width="31" height="34"/>
@@ -96,9 +93,6 @@
                                 <state key="normal" title="Tap to enter  preferences">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="BDe-He-BlJ" kind="show" id="ZYx-yD-Q1s"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.82723270939086291" green="0.60946747055874539" blue="0.51404415093013722" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -132,85 +126,10 @@
             </objects>
             <point key="canvasLocation" x="3" y="139"/>
         </scene>
-        <!--Select genres-->
-        <scene sceneID="WsE-zh-7aG">
-            <objects>
-                <tableViewController id="Ao1-de-bPw" customClass="SelectionTableViewController" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bni-oh-U2z">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="selectionCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="selectionCell" rowHeight="50" id="xWk-fV-jBc" customClass="SelectionTableViewCell" customModule="MovieNight" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xWk-fV-jBc" id="3ot-2K-tQX">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="love" translatesAutoresizingMaskIntoConstraints="NO" id="TKi-uZ-oJK">
-                                            <rect key="frame" x="20" y="16" width="29" height="24"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Action" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcJ-Ma-73a">
-                                            <rect key="frame" x="70" y="19" width="49" height="19"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="loveImageView" destination="TKi-uZ-oJK" id="l7C-v0-SAd"/>
-                                    <outlet property="title" destination="KcJ-Ma-73a" id="FgA-qx-nq2"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Ao1-de-bPw" id="tfe-8S-PNE"/>
-                            <outlet property="delegate" destination="Ao1-de-bPw" id="T7L-le-aLv"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Select genres" id="tpa-MA-SKc">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="PG9-65-BIM">
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="showNextSelectionPage:" destination="Ao1-de-bPw" id="YGa-OS-dQG"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="47W-TK-3Rl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1867" y="139"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="cjk-gL-1AG">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BDe-He-BlJ" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pfD-Ps-Xo2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Ao1-de-bPw" kind="relationship" relationship="rootViewController" id="5IL-ju-Hfo"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zqS-9I-UWD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="957.97101449275374" y="138.58695652173915"/>
-        </scene>
     </scenes>
     <resources>
         <image name="avatar1" width="170" height="170"/>
         <image name="avatar2" width="170" height="170"/>
         <image name="check" width="170" height="170"/>
-        <image name="love" width="170" height="170"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="ZYx-yD-Q1s"/>
-    </inferredMetricsTieBreakers>
 </document>

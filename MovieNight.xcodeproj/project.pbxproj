@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		D258BF251F0E3B41004FD0B9 /* MovieNightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D258BF241F0E3B41004FD0B9 /* MovieNightModel.swift */; };
 		D258BF2F1F0E856B004FD0B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D258BF2E1F0E856B004FD0B9 /* Assets.xcassets */; };
-		D258BF311F0E87EF004FD0B9 /* SelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D258BF301F0E87EF004FD0B9 /* SelectionTableViewController.swift */; };
-		D258BF331F0E880E004FD0B9 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D258BF321F0E880E004FD0B9 /* SelectionTableViewCell.swift */; };
-		D258BF351F0E99B7004FD0B9 /* SelectDirectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D258BF341F0E99B7004FD0B9 /* SelectDirectorTableViewController.swift */; };
 		D26F93DE1F0D8A5700E6078E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F93DD1F0D8A5700E6078E /* AppDelegate.swift */; };
 		D26F93E01F0D8A5700E6078E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F93DF1F0D8A5700E6078E /* HomeViewController.swift */; };
 		D26F93E31F0D8A5700E6078E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D26F93E11F0D8A5700E6078E /* Main.storyboard */; };
@@ -40,9 +37,6 @@
 /* Begin PBXFileReference section */
 		D258BF241F0E3B41004FD0B9 /* MovieNightModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieNightModel.swift; sourceTree = "<group>"; };
 		D258BF2E1F0E856B004FD0B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D258BF301F0E87EF004FD0B9 /* SelectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTableViewController.swift; sourceTree = "<group>"; };
-		D258BF321F0E880E004FD0B9 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
-		D258BF341F0E99B7004FD0B9 /* SelectDirectorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDirectorTableViewController.swift; sourceTree = "<group>"; };
 		D26F93DA1F0D8A5700E6078E /* MovieNight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieNight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26F93DD1F0D8A5700E6078E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D26F93DF1F0D8A5700E6078E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -107,13 +101,10 @@
 			children = (
 				D26F93DD1F0D8A5700E6078E /* AppDelegate.swift */,
 				D26F93DF1F0D8A5700E6078E /* HomeViewController.swift */,
-				D258BF301F0E87EF004FD0B9 /* SelectionTableViewController.swift */,
-				D258BF321F0E880E004FD0B9 /* SelectionTableViewCell.swift */,
+				D258BF241F0E3B41004FD0B9 /* MovieNightModel.swift */,
 				D26F93E11F0D8A5700E6078E /* Main.storyboard */,
-				D258BF341F0E99B7004FD0B9 /* SelectDirectorTableViewController.swift */,
 				D26F93E61F0D8A5700E6078E /* LaunchScreen.storyboard */,
 				D26F93E91F0D8A5700E6078E /* Info.plist */,
-				D258BF241F0E3B41004FD0B9 /* MovieNightModel.swift */,
 				D258BF2E1F0E856B004FD0B9 /* Assets.xcassets */,
 			);
 			path = MovieNight;
@@ -273,10 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D26F93E01F0D8A5700E6078E /* HomeViewController.swift in Sources */,
-				D258BF351F0E99B7004FD0B9 /* SelectDirectorTableViewController.swift in Sources */,
 				D26F93DE1F0D8A5700E6078E /* AppDelegate.swift in Sources */,
-				D258BF311F0E87EF004FD0B9 /* SelectionTableViewController.swift in Sources */,
-				D258BF331F0E880E004FD0B9 /* SelectionTableViewCell.swift in Sources */,
 				D258BF251F0E3B41004FD0B9 /* MovieNightModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

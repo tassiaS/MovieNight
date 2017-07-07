@@ -10,17 +10,17 @@ import Foundation
 
 //Model
 
-protocol People {
+protocol Person {
     var name: String { get }
     var movies: [Movie] { get }
 }
 
-struct Actor: People {
+struct Actor: Person {
     var name: String
     var movies: [Movie]
 }
 
-struct Director: People {
+struct Director: Person {
     var name: String
     var movies: [Movie]
 }
@@ -28,7 +28,7 @@ struct Director: People {
 struct Movie {
     var title: String
     var releaseDate: String
-    var voteAverage: Int
+    var voteAverage: Float
 }
 
 struct Genre {
