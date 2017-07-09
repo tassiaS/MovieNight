@@ -1,18 +1,14 @@
 //
-//  SelectionTableViewCell.swift
+//  ActorTableViewCell.swift
 //  MovieNight
 //
-//  Created by Tassia Serrao on 06/07/2017.
+//  Created by Tassia Serrao on 09/07/2017.
 //  Copyright © 2017 Tassia Serrao. All rights reserved.
 //
 
 import UIKit
 
-class SelectionTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var loveImageView: UIImageView!
-    @IBOutlet weak var title: UILabel!
-    
+class ActorTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
