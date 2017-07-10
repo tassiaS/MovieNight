@@ -17,17 +17,24 @@ protocol JSONDecodable {
 
 protocol People {
     var name: String { get }
-    var movies: [Movie] { get }
+    var movies: [Movie]? { get }
 }
 
-struct Actor: People {
+struct Actor: People, JSONDecodable {
     var name: String
-    var movies: [Movie]
+    var movies: [Movie]?
+    
+    init?(JSON: [String: AnyObject]) {
+        guard let name = JSON["name"] as? String else {
+            return nil
+        }
+        self.name = name
+    }
 }
 
 struct Director: People {
     var name: String
-    var movies: [Movie]
+    var movies: [Movie]?
 }
 
 struct Movie {
