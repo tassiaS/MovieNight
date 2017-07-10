@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E3283D316790FD67ED3EC761676CF589DB9CEF51",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C2A2443E0B8899E4CCA3E0E0F13EE76847BF8128" : 9223372036854775807,
+    "E3283D316790FD67ED3EC761676CF589DB9CEF51" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0BE8FEC0-42DA-400A-9DF2-585AD05F1B2D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C2A2443E0B8899E4CCA3E0E0F13EE76847BF8128" : "..\/..\/MYprojects\/TheApiAwakens",
+    "E3283D316790FD67ED3EC761676CF589DB9CEF51" : "MovieNight\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MovieNight",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MovieNight.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tassiacastro\/APIAwakens.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C2A2443E0B8899E4CCA3E0E0F13EE76847BF8128"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tassiacastro\/MovieNight.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E3283D316790FD67ED3EC761676CF589DB9CEF51"
+    }
+  ]
+}
