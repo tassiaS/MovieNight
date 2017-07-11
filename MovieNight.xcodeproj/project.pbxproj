@@ -15,10 +15,10 @@
 		D26E7DDB1F12714A009FF237 /* ActorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DDA1F12714A009FF237 /* ActorTableViewCell.swift */; };
 		D26E7DDD1F127159009FF237 /* ActorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DDC1F127159009FF237 /* ActorViewController.swift */; };
 		D26E7DE11F1372D7009FF237 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DE01F1372D7009FF237 /* ResultTableViewCell.swift */; };
-		D26E7DE31F137563009FF237 /* ResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DE21F137563009FF237 /* ResultTableViewController.swift */; };
-		D26E7DE51F13BBCE009FF237 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DE41F13BBCE009FF237 /* APIClient.swift */; };
-		D26E7DEC1F14D3B1009FF237 /* MovieNightApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DEB1F14D3B1009FF237 /* MovieNightApiClient.swift */; };
-		D26E7DEE1F1500F7009FF237 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DED1F1500F7009FF237 /* MovieViewController.swift */; };
+		D26E7DF01F15623B009FF237 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DEF1F15623B009FF237 /* APIClient.swift */; };
+		D26E7DF21F1562E7009FF237 /* MovieNightApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DF11F1562E7009FF237 /* MovieNightApiClient.swift */; };
+		D26E7DF51F156468009FF237 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DF31F156468009FF237 /* MovieViewController.swift */; };
+		D26E7DF61F156468009FF237 /* ResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DF41F156468009FF237 /* ResultTableViewController.swift */; };
 		D26F93DE1F0D8A5700E6078E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F93DD1F0D8A5700E6078E /* AppDelegate.swift */; };
 		D26F93E01F0D8A5700E6078E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F93DF1F0D8A5700E6078E /* HomeViewController.swift */; };
 		D26F93E31F0D8A5700E6078E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D26F93E11F0D8A5700E6078E /* Main.storyboard */; };
@@ -53,10 +53,10 @@
 		D26E7DDA1F12714A009FF237 /* ActorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActorTableViewCell.swift; sourceTree = "<group>"; };
 		D26E7DDC1F127159009FF237 /* ActorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActorViewController.swift; sourceTree = "<group>"; };
 		D26E7DE01F1372D7009FF237 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
-		D26E7DE21F137563009FF237 /* ResultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultTableViewController.swift; path = ../ResultTableViewController.swift; sourceTree = "<group>"; };
-		D26E7DE41F13BBCE009FF237 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIClient.swift; path = ../../../../MYprojects/TheApiAwakens/APIClient.swift; sourceTree = "<group>"; };
-		D26E7DEB1F14D3B1009FF237 /* MovieNightApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieNightApiClient.swift; path = ../../../../MYprojects/TheApiAwakens/TheApiAwakens/MovieNightApiClient.swift; sourceTree = "<group>"; };
-		D26E7DED1F1500F7009FF237 /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieViewController.swift; path = ../MovieViewController.swift; sourceTree = "<group>"; };
+		D26E7DEF1F15623B009FF237 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		D26E7DF11F1562E7009FF237 /* MovieNightApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieNightApiClient.swift; sourceTree = "<group>"; };
+		D26E7DF31F156468009FF237 /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
+		D26E7DF41F156468009FF237 /* ResultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTableViewController.swift; sourceTree = "<group>"; };
 		D26F93DA1F0D8A5700E6078E /* MovieNight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieNight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26F93DD1F0D8A5700E6078E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D26F93DF1F0D8A5700E6078E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -99,9 +99,9 @@
 		D26E7DE61F13BBF6009FF237 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D26E7DEF1F15623B009FF237 /* APIClient.swift */,
+				D26E7DF11F1562E7009FF237 /* MovieNightApiClient.swift */,
 				D258BF241F0E3B41004FD0B9 /* MovieNightModel.swift */,
-				D26E7DE41F13BBCE009FF237 /* APIClient.swift */,
-				D26E7DEB1F14D3B1009FF237 /* MovieNightApiClient.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -135,10 +135,10 @@
 				D26E7DD21F126C12009FF237 /* GenreTableViewCell.swift */,
 				D26E7DDC1F127159009FF237 /* ActorViewController.swift */,
 				D26E7DDA1F12714A009FF237 /* ActorTableViewCell.swift */,
-				D26E7DED1F1500F7009FF237 /* MovieViewController.swift */,
 				D26E7DD81F12713B009FF237 /* MovieTableViewCell.swift */,
-				D26E7DE21F137563009FF237 /* ResultTableViewController.swift */,
+				D26E7DF31F156468009FF237 /* MovieViewController.swift */,
 				D26E7DE01F1372D7009FF237 /* ResultTableViewCell.swift */,
+				D26E7DF41F156468009FF237 /* ResultTableViewController.swift */,
 				D26F93E11F0D8A5700E6078E /* Main.storyboard */,
 				D26F93E61F0D8A5700E6078E /* LaunchScreen.storyboard */,
 				D26E7DE61F13BBF6009FF237 /* Model */,
@@ -301,19 +301,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D26E7DEE1F1500F7009FF237 /* MovieViewController.swift in Sources */,
+				D26E7DF21F1562E7009FF237 /* MovieNightApiClient.swift in Sources */,
 				D26E7DE11F1372D7009FF237 /* ResultTableViewCell.swift in Sources */,
 				D26F93E01F0D8A5700E6078E /* HomeViewController.swift in Sources */,
+				D26E7DF61F156468009FF237 /* ResultTableViewController.swift in Sources */,
 				D26E7DD51F126D00009FF237 /* GenreViewController.swift in Sources */,
 				D26E7DDD1F127159009FF237 /* ActorViewController.swift in Sources */,
 				D26F93DE1F0D8A5700E6078E /* AppDelegate.swift in Sources */,
 				D258BF251F0E3B41004FD0B9 /* MovieNightModel.swift in Sources */,
-				D26E7DEC1F14D3B1009FF237 /* MovieNightApiClient.swift in Sources */,
 				D26E7DD31F126C12009FF237 /* GenreTableViewCell.swift in Sources */,
+				D26E7DF01F15623B009FF237 /* APIClient.swift in Sources */,
 				D26E7DD91F12713B009FF237 /* MovieTableViewCell.swift in Sources */,
-				D26E7DE31F137563009FF237 /* ResultTableViewController.swift in Sources */,
 				D26E7DDB1F12714A009FF237 /* ActorTableViewCell.swift in Sources */,
-				D26E7DE51F13BBCE009FF237 /* APIClient.swift in Sources */,
+				D26E7DF51F156468009FF237 /* MovieViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

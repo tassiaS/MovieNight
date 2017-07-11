@@ -78,8 +78,10 @@ extension APIClient {
                 }
                 
                 if let result = parse(json) {
-                    if (json["next"] as? String) != nil {
-                        completion(APIResult.success((result,hasNextPage)))
+                    if let page = json["page"] as? Int, let totalPages = json["total_pages"] as? Int {
+                        if page != totalPages {
+                            completion(APIResult.success((result,hasNextPage)))
+                        }
                     } else {
                         hasNextPage = false
                         completion(APIResult.success((result,hasNextPage)))

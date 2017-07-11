@@ -19,8 +19,8 @@ extension Endpoint {
         var queryItems = [URLQueryItem]()
         
         for (key, value) in parameters {
-            let queryItem = URLQueryItem(name: key, value: "\(value)")
-            queryItems.append(queryItem)
+                let queryItem = URLQueryItem(name: key, value: "\(value)")
+                queryItems.append(queryItem)
         }
         return queryItems
     }
@@ -37,7 +37,8 @@ extension Endpoint {
 
 enum MovieNightEndpoint: Endpoint {
     case Genre
-    case Actor
+    case Actor(page: String)
+    case Movie(page: String)
     
     var baseURL: String {
         return "https://api.themoviedb.org"
@@ -48,15 +49,20 @@ enum MovieNightEndpoint: Endpoint {
                 return "/3/genre/movie/list"
             case .Actor:
                 return "/3/person/popular"
+            case .Movie:
+                return "/3/movie/popular"
         }
     }
     
     var parameters: [String : String] {
         var parameters = [String : String]()
         switch self {
+        case .Actor(let page), .Movie(let page) :
+            parameters["page"] = page
+            parameters["api_key"] = "57b213eb9d700e45c3f1ddaa754d7134"
+            return parameters
         default:
             parameters["api_key"] = "57b213eb9d700e45c3f1ddaa754d7134"
-            parameters["page"] = "1"
             return parameters
         }
     }
@@ -76,7 +82,7 @@ final class MovieNightApiClient: APIClient {
         self.init(configuration: .default)
     }
     
-    func fetchForGenre(completion: @escaping (APIResult<[Genre]>) -> Void) {
+    func fetchForGenres(completion: @escaping (APIResult<[Genre]>) -> Void) {
         let endpoint = MovieNightEndpoint.Genre
         let request = endpoint.request
         
@@ -90,8 +96,8 @@ final class MovieNightApiClient: APIClient {
         }, completion: completion)
     }
     
-    func fetchForActor(completion: @escaping (APIResult<[Actor]>) -> Void) {
-        let endpoint = MovieNightEndpoint.Actor
+    func fetchForActors(page: Int, completion: @escaping (APIResult<[Actor]>) -> Void) {
+        let endpoint = MovieNightEndpoint.Actor(page: String(page))
         let request = endpoint.request
         
         fetch(request: request, parse: { (json) -> [Actor]? in
@@ -103,6 +109,21 @@ final class MovieNightApiClient: APIClient {
             }
         }, completion: completion)
     }
+    
+    func fetchForMovies(page: Int, completion: @escaping (APIResult<[Movie]>) -> Void) {
+        let endpoint = MovieNightEndpoint.Movie(page: String(page))
+        let request = endpoint.request
+        
+        fetch(request: request, parse: { (json) -> [Movie]? in
+            guard let popularMovies = json["results"] as? [[String:AnyObject]] else {
+                return nil
+            }
+            return popularMovies.flatMap {
+                return Movie(JSON: $0)
+            }
+        }, completion: completion)
+    }
+
 
     
 }
