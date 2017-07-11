@@ -583,7 +583,6 @@
         <image name="avatar1" width="170" height="170"/>
         <image name="avatar2" width="170" height="170"/>
         <image name="check" width="170" height="170"/>
-        <image name="love" width="170" height="170"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jX1-LW-q1g"/>
