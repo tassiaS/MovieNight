@@ -8,6 +8,6 @@
 
 import UIKit
 
-class DirectorTableViewCell: UITableViewCell {
+class MovieTableViewCell: UITableViewCell {
 
 }
