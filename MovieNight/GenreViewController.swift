@@ -31,7 +31,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
         apiClient.fetchForGenre { [weak self] (result) in
             switch result {
             case .failure(let error) : print(error)
-            case.success(let resource, _) :
+            case .success(let resource, _) :
                 self?.genres = resource
                 self?.genreTableView.reloadData()
             }
