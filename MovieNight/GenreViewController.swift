@@ -11,39 +11,40 @@ import UIKit
 class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var genreTableView: UITableView!
+    var genres = [Genre]()
+    let apiClient = MovieNightApiClient()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         genreTableView.delegate = self
         genreTableView.dataSource = self
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        loadData()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func loadData() {
+        fetchForGenres()
     }
-    */
+    
+    func fetchForGenres() {
+        apiClient.fetchForGenre { (result) in
+            switch result {
+            case .failure(let error) : print(error)
+            case.success(let resource, _) :
+                self.genres = resource
+                self.genreTableView.reloadData()
+            }
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreIdCell", for: indexPath) as! GenreTableViewCell
+        cell.titleLabel.text = genres[indexPath.row].name
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return genres.count
     }
-    
-
 }

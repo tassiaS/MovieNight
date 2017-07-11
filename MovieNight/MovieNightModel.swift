@@ -9,6 +9,9 @@
 import Foundation
 
 //Model
+protocol JSONDecodable {
+    init?(JSON: [String: AnyObject])
+}
 
 protocol Person {
     var name: String { get }
@@ -31,7 +34,14 @@ struct Movie {
     var voteAverage: Float
 }
 
-struct Genre {
+struct Genre: JSONDecodable{
     var name: String
-    var movies: [Movie]
+    var movies: [Movie]?
+    
+    init?(JSON: [String: AnyObject]) {
+        guard let name = JSON["name"] as? String else {
+            return nil
+        }
+        self.name = name
+    }
 }
