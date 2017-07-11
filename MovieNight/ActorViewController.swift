@@ -13,6 +13,12 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var actorTableView: UITableView!
     var apiClient = MovieNightApiClient()
     var actors = [Actor]()
+    var hasNextPage: Bool = true {
+        didSet {
+            self.page += 1
+        }
+    }
+    var page = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,24 +30,29 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func loadData() {
-        fetchForActors()
+        fetchForActors(with: page)
     }
     
-    func fetchForActors() {
-        apiClient.fetchForActors { [weak self] (result) in
+    func fetchForActors(with page: Int) {
+        apiClient.fetchForActors(page: page) { [weak self] (result) in
             switch result {
             case .failure(let error) :
                 return print(error)
-            case .success(let resource, _):
-                self?.actors = resource
+            case .success(let resource, let hasPage):
+                self?.actors += resource
+                self?.hasNextPage = hasPage
                 self?.actorTableView.reloadData()
             }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "actorIdCell", for: indexPath) as! ActorTableViewCell
         
+        if (actors.count - indexPath.row) == 5 && hasNextPage {
+            fetchForActors(with: page)
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "actorIdCell", for: indexPath) as! ActorTableViewCell
         cell.nameLabel.text = actors[indexPath.row].name
         return cell
     }
@@ -49,5 +60,4 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return actors.count
     }
-
 }

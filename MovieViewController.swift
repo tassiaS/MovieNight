@@ -13,6 +13,12 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var movieTableView: UITableView!
     var apiClient = MovieNightApiClient()
     var movies = [Movie]()
+    var hasNextPage: Bool = true {
+        didSet {
+            self.page += 1
+        }
+    }
+    var page = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,22 +29,28 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func loadData() {
-        fetchForMovies()
+        fetchForMovies(with: page)
     }
     
-    func fetchForMovies() {
-        apiClient.fetchForMovies { [weak self] (results) in
+    func fetchForMovies(with page: Int) {
+        apiClient.fetchForMovies(page: page) { [weak self] (results) in
             switch results {
                 case .failure(let error) :
                     print(error)
-                case .success(let resource, _) :
-                    self?.movies = resource
+                case .success(let resource, let hasPage) :
+                    self?.movies += resource
+                    self?.hasNextPage = hasPage
                     self?.movieTableView.reloadData()
             }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if (movies.count - indexPath.row) == 3 && hasNextPage {
+            fetchForMovies(with: page)
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "movieIdCell", for: indexPath) as! MovieTableViewCell
         cell.titleLabel.text = movies[indexPath.row].title
         return cell
@@ -47,5 +59,4 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
-    
 }
