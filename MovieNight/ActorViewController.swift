@@ -28,7 +28,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func fetchForActors() {
-        apiClient.fetchForActor { [weak self] (result) in
+        apiClient.fetchForActors { [weak self] (result) in
             switch result {
             case .failure(let error) :
                 return print(error)

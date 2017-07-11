@@ -462,6 +462,10 @@
                                                 <constraint firstItem="TXj-2P-s28" firstAttribute="top" secondItem="PDw-1s-Dm2" secondAttribute="topMargin" constant="6" id="rdW-r3-J3K"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="loveImage" destination="cds-wW-aIW" id="p7F-y8-Gtj"/>
+                                            <outlet property="titleLabel" destination="TXj-2P-s28" id="VWD-3a-Cd2"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
