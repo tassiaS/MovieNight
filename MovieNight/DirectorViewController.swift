@@ -19,7 +19,7 @@ class DirectorViewController: UIViewController, UITableViewDelegate, UITableView
         directorTableView.dataSource = self
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -37,7 +37,7 @@ class DirectorViewController: UIViewController, UITableViewDelegate, UITableView
     */
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "directorIdCell", for: indexPath) as! DirectorTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "directorIdCell", for: indexPath) as! DirectorTableViewCell
         return cell
     }
     
