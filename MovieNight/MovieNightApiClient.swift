@@ -36,7 +36,7 @@ extension Endpoint {
 }
 
 enum MovieNightEndpoint: Endpoint {
-    case Genre
+    case Genre(page: String)
     case Actor(page: String)
     case Movie(page: String)
     
@@ -57,12 +57,9 @@ enum MovieNightEndpoint: Endpoint {
     var parameters: [String : String] {
         var parameters = [String : String]()
         switch self {
-        case .Actor(let page), .Movie(let page) :
+        case .Actor(let page), .Movie(let page), .Genre(let page) :
+            parameters["api_key"] = "57b213eb9d700e45c3f1ddaa754d7134"
             parameters["page"] = page
-            parameters["api_key"] = "57b213eb9d700e45c3f1ddaa754d7134"
-            return parameters
-        default:
-            parameters["api_key"] = "57b213eb9d700e45c3f1ddaa754d7134"
             return parameters
         }
     }
@@ -82,8 +79,8 @@ final class MovieNightApiClient: APIClient {
         self.init(configuration: .default)
     }
     
-    func fetchForGenres(completion: @escaping (APIResult<[Genre]>) -> Void) {
-        let endpoint = MovieNightEndpoint.Genre
+    func fetchGenres(page: Int, completion: @escaping (APIResult<[Genre]>) -> Void) {
+        let endpoint = MovieNightEndpoint.Genre(page: String(page))
         let request = endpoint.request
         
         fetch(request: request, parse: { (json) -> [Genre]? in
@@ -96,7 +93,7 @@ final class MovieNightApiClient: APIClient {
         }, completion: completion)
     }
     
-    func fetchForActors(page: Int, completion: @escaping (APIResult<[Actor]>) -> Void) {
+    func fetchActors(page: Int, completion: @escaping (APIResult<[Actor]>) -> Void) {
         let endpoint = MovieNightEndpoint.Actor(page: String(page))
         let request = endpoint.request
         
@@ -110,7 +107,7 @@ final class MovieNightApiClient: APIClient {
         }, completion: completion)
     }
     
-    func fetchForMovies(page: Int, completion: @escaping (APIResult<[Movie]>) -> Void) {
+    func fetchMovies(page: Int, completion: @escaping (APIResult<[Movie]>) -> Void) {
         let endpoint = MovieNightEndpoint.Movie(page: String(page))
         let request = endpoint.request
         

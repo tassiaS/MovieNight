@@ -53,7 +53,7 @@ extension APIClient {
                     }
                 default:
                     completion(nil, HTTPResponse, nil)
-                    print("Received HTTP response: \(HTTPResponse.statusCode), which was not handled, \(request.url)")
+                    print("Received HTTP response: \(HTTPResponse.statusCode), which was not handled, \(String(describing: request.url))")
                 }
             }
         }

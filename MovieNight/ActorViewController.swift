@@ -34,7 +34,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func fetchForActors(with page: Int) {
-        apiClient.fetchForActors(page: page) { [weak self] (result) in
+        apiClient.fetchActors(page: page) { [weak self] (result) in
             switch result {
             case .failure(let error) :
                 return print(error)
@@ -48,13 +48,17 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if (actors.count - indexPath.row) == 5 && hasNextPage {
+        if shouldFetchNextPage(indexPath: indexPath) {
             fetchForActors(with: page)
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "actorIdCell", for: indexPath) as! ActorTableViewCell
         cell.nameLabel.text = actors[indexPath.row].name
         return cell
+    }
+    
+    func shouldFetchNextPage(indexPath: IndexPath) -> Bool {
+        return (actors.count - indexPath.row) == 5 && hasNextPage ? true : false
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
