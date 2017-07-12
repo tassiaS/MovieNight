@@ -9,18 +9,16 @@
 import Foundation
 
 //Model
-
 protocol JSONDecodable {
     init?(JSON: [String: AnyObject])
 }
 
-
-protocol People {
+protocol Person {
     var name: String { get }
     var movies: [Movie]? { get }
 }
 
-struct Actor: People, JSONDecodable {
+struct Actor: Person, JSONDecodable {
     var name: String
     var movies: [Movie]?
     
@@ -44,6 +42,9 @@ struct Movie : JSONDecodable {
         self.title = name
     }
 
+struct Director: Person {
+    var name: String
+    var movies: [Movie]?
 }
 
 struct Genre: JSONDecodable{
