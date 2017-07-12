@@ -9,6 +9,6 @@
 import UIKit
 
 class GenreTableViewCell: UITableViewCell {
-    @IBOutlet weak var loveImageView: UIImageView!
+    @IBOutlet weak var loveButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
 }

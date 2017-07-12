@@ -201,29 +201,30 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="love" translatesAutoresizingMaskIntoConstraints="NO" id="2BV-LN-as4">
-                                                    <rect key="frame" x="14" y="12" width="27" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="6vp-8c-QLj"/>
-                                                        <constraint firstAttribute="width" constant="27" id="hiv-xQ-aPS"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJ1-38-Im6">
-                                                    <rect key="frame" x="56.000000000000007" y="14" width="51.666666666666679" height="21"/>
+                                                    <rect key="frame" x="55" y="10" width="52" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dN-MG-JQJ">
+                                                    <rect key="frame" x="16" y="8" width="27" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="27" id="RTD-ig-Edd"/>
+                                                        <constraint firstAttribute="height" constant="25" id="iOC-o2-pOj"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="love"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="2BV-LN-as4" firstAttribute="leading" secondItem="911-pw-Lqc" secondAttribute="leading" constant="14" id="1sc-ns-bSG"/>
-                                                <constraint firstItem="BJ1-38-Im6" firstAttribute="leading" secondItem="2BV-LN-as4" secondAttribute="trailing" constant="15" id="8a7-mY-ASk"/>
-                                                <constraint firstItem="BJ1-38-Im6" firstAttribute="top" secondItem="911-pw-Lqc" secondAttribute="topMargin" constant="6" id="RIp-At-yW0"/>
-                                                <constraint firstItem="2BV-LN-as4" firstAttribute="top" secondItem="911-pw-Lqc" secondAttribute="top" constant="12" id="uCO-9Q-ym0"/>
+                                                <constraint firstItem="BJ1-38-Im6" firstAttribute="centerY" secondItem="8dN-MG-JQJ" secondAttribute="centerY" id="8X6-W1-bDa"/>
+                                                <constraint firstItem="8dN-MG-JQJ" firstAttribute="leading" secondItem="911-pw-Lqc" secondAttribute="leadingMargin" constant="8" id="BkV-Nh-xfo"/>
+                                                <constraint firstAttribute="topMargin" secondItem="8dN-MG-JQJ" secondAttribute="top" id="J6I-vA-b9X"/>
+                                                <constraint firstItem="BJ1-38-Im6" firstAttribute="leading" secondItem="8dN-MG-JQJ" secondAttribute="trailing" constant="12" id="RmJ-vL-EYC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="loveImageView" destination="2BV-LN-as4" id="jnP-J0-ssi"/>
+                                            <outlet property="loveButton" destination="8dN-MG-JQJ" id="0oa-Ar-kd5"/>
                                             <outlet property="titleLabel" destination="BJ1-38-Im6" id="Fc1-8H-uda"/>
                                         </connections>
                                     </tableViewCell>
@@ -321,29 +322,31 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="love" translatesAutoresizingMaskIntoConstraints="NO" id="xaM-P0-qpN">
-                                                    <rect key="frame" x="14" y="12" width="27" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="27" id="9C0-ni-vh8"/>
-                                                        <constraint firstAttribute="height" constant="25" id="CZy-3s-5qe"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mea-DY-Dn3">
-                                                    <rect key="frame" x="56.000000000000007" y="14" width="51.666666666666679" height="21"/>
+                                                    <rect key="frame" x="55.000000000000007" y="14" width="51.666666666666679" height="13"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rne-gw-hTZ">
+                                                    <rect key="frame" x="16" y="8" width="27" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="27" id="Shz-QI-ph7"/>
+                                                        <constraint firstAttribute="height" constant="25" id="uMX-Rf-wO1"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="love"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="mea-DY-Dn3" firstAttribute="leading" secondItem="xaM-P0-qpN" secondAttribute="trailing" constant="15" id="06d-UN-ymA"/>
                                                 <constraint firstItem="mea-DY-Dn3" firstAttribute="top" secondItem="FoZ-y7-p9a" secondAttribute="topMargin" constant="6" id="4UO-B1-Cp1"/>
-                                                <constraint firstItem="xaM-P0-qpN" firstAttribute="leading" secondItem="FoZ-y7-p9a" secondAttribute="leading" constant="14" id="CUb-ws-pR6"/>
-                                                <constraint firstItem="xaM-P0-qpN" firstAttribute="top" secondItem="FoZ-y7-p9a" secondAttribute="top" constant="12" id="PXc-5H-FFK"/>
+                                                <constraint firstItem="mea-DY-Dn3" firstAttribute="centerY" secondItem="rne-gw-hTZ" secondAttribute="centerY" id="GLR-ih-hIt"/>
+                                                <constraint firstItem="rne-gw-hTZ" firstAttribute="top" secondItem="FoZ-y7-p9a" secondAttribute="topMargin" id="RPJ-m3-D36"/>
+                                                <constraint firstItem="mea-DY-Dn3" firstAttribute="leading" secondItem="rne-gw-hTZ" secondAttribute="trailing" constant="12" id="rgA-F7-PdW"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="rne-gw-hTZ" secondAttribute="leading" constant="-8" id="v7n-Qc-ITM"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="loveImage" destination="xaM-P0-qpN" id="vUn-l1-PHb"/>
+                                            <outlet property="loveButton" destination="rne-gw-hTZ" id="oaA-CK-MqM"/>
                                             <outlet property="nameLabel" destination="mea-DY-Dn3" id="N08-b4-acC"/>
                                         </connections>
                                     </tableViewCell>
@@ -430,40 +433,42 @@
                                     <constraint firstAttribute="height" constant="66" id="hq9-Yo-PNi"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gB0-Ae-v3M">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gB0-Ae-v3M">
                                 <rect key="frame" x="0.0" y="86" width="414" height="585"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieIdCell" id="7qF-hX-RRi" customClass="MovieTableViewCell" customModule="MovieNight" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieIdCell" rowHeight="55" id="7qF-hX-RRi" customClass="MovieTableViewCell" customModule="MovieNight" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7qF-hX-RRi" id="PDw-1s-Dm2">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="love" translatesAutoresizingMaskIntoConstraints="NO" id="cds-wW-aIW">
-                                                    <rect key="frame" x="14" y="12" width="27" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="27" id="AtW-Y4-i0U"/>
-                                                        <constraint firstAttribute="height" constant="25" id="Tyj-2h-oFH"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXj-2P-s28">
-                                                    <rect key="frame" x="56.000000000000007" y="14" width="51.666666666666679" height="21"/>
+                                                    <rect key="frame" x="55.000000000000007" y="14" width="51.666666666666679" height="13"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQn-aM-BHD">
+                                                    <rect key="frame" x="16" y="8" width="27" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="27" id="sXz-hC-gHs"/>
+                                                        <constraint firstAttribute="height" constant="25" id="xdy-DL-xUZ"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="love"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="cds-wW-aIW" firstAttribute="top" secondItem="PDw-1s-Dm2" secondAttribute="top" constant="12" id="Dvq-Hd-Dqt"/>
-                                                <constraint firstItem="TXj-2P-s28" firstAttribute="leading" secondItem="cds-wW-aIW" secondAttribute="trailing" constant="15" id="LdN-m4-qAc"/>
-                                                <constraint firstItem="cds-wW-aIW" firstAttribute="leading" secondItem="PDw-1s-Dm2" secondAttribute="leading" constant="14" id="q0K-Bx-5pv"/>
+                                                <constraint firstItem="TXj-2P-s28" firstAttribute="leading" secondItem="wQn-aM-BHD" secondAttribute="trailing" constant="12" id="4md-hB-8t7"/>
+                                                <constraint firstItem="wQn-aM-BHD" firstAttribute="top" secondItem="PDw-1s-Dm2" secondAttribute="topMargin" id="F5t-Sn-WDI"/>
+                                                <constraint firstItem="TXj-2P-s28" firstAttribute="centerY" secondItem="wQn-aM-BHD" secondAttribute="centerY" id="XK0-Xu-ynh"/>
                                                 <constraint firstItem="TXj-2P-s28" firstAttribute="top" secondItem="PDw-1s-Dm2" secondAttribute="topMargin" constant="6" id="rdW-r3-J3K"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="wQn-aM-BHD" secondAttribute="leading" constant="-8" id="uQA-Dt-41A"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="loveImage" destination="cds-wW-aIW" id="p7F-y8-Gtj"/>
+                                            <outlet property="loveButton" destination="wQn-aM-BHD" id="hPe-4f-Kfj"/>
                                             <outlet property="titleLabel" destination="TXj-2P-s28" id="VWD-3a-Cd2"/>
                                         </connections>
                                     </tableViewCell>
@@ -490,7 +495,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uFE-hp-1Qr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2490" y="139"/>
+            <point key="canvasLocation" x="2489.8550724637685" y="138.58695652173915"/>
         </scene>
         <!--Result Table View Controller-->
         <scene sceneID="zyD-SA-EsW">
