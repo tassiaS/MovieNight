@@ -29,10 +29,10 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func loadData() {
-        fetchForMovies(with: page)
+        fetchMovies(with: page)
     }
     
-    func fetchForMovies(with page: Int) {
+    func fetchMovies(with page: Int) {
         apiClient.fetchMovies(page: page) { [weak self] (results) in
             switch results {
                 case .failure(let error) :
@@ -48,7 +48,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if (movies.count - indexPath.row) == 3 && hasNextPage {
-            fetchForMovies(with: page)
+            fetchMovies(with: page)
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "movieIdCell", for: indexPath) as! MovieTableViewCell

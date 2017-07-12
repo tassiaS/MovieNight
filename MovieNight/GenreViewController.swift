@@ -30,10 +30,10 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     }
     
     func loadData() {
-        fetchForGenres(with: page)
+        fetchGenres(with: page)
     }
     
-    func fetchForGenres(with page: Int) {
+    func fetchGenres(with page: Int) {
         apiClient.fetchGenres(page: page) { [weak self] (result) in
             switch result {
             case .failure(let error) : print(error)
@@ -48,7 +48,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if shouldFetchNextPage(indexPath: indexPath) {
-            fetchForGenres(with: page)
+            fetchGenres(with: page)
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreIdCell", for: indexPath) as! GenreTableViewCell
@@ -57,7 +57,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     }
     
     func shouldFetchNextPage(indexPath: IndexPath) -> Bool {
-        return (genres.count - indexPath.row) == 5 && hasNextPage ? true : false
+        return (genres.count - indexPath.row) == 5 && hasNextPage
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

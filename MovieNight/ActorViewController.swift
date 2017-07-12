@@ -30,10 +30,10 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func loadData() {
-        fetchForActors(with: page)
+        fetchActors(with: page)
     }
     
-    func fetchForActors(with page: Int) {
+    func fetchActors(with page: Int) {
         apiClient.fetchActors(page: page) { [weak self] (result) in
             switch result {
             case .failure(let error) :
@@ -49,7 +49,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if shouldFetchNextPage(indexPath: indexPath) {
-            fetchForActors(with: page)
+            fetchActors(with: page)
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "actorIdCell", for: indexPath) as! ActorTableViewCell
