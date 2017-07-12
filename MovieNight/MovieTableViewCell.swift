@@ -8,6 +8,7 @@
 
 import UIKit
 
-class DirectorTableViewCell: UITableViewCell {
-
+class MovieTableViewCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var loveButton: UIButton!
 }

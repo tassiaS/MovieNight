@@ -30,15 +30,21 @@ struct Actor: Person, JSONDecodable {
     }
 }
 
+struct Movie : JSONDecodable {
+    var title: String
+    var releaseDate: String?
+    var voteAverage: Int?
+    
+    init?(JSON: [String: AnyObject]) {
+        guard let name = JSON["title"] as? String else {
+            return nil
+        }
+        self.title = name
+    }
+
 struct Director: Person {
     var name: String
     var movies: [Movie]?
-}
-
-struct Movie {
-    var title: String
-    var releaseDate: String
-    var voteAverage: Float
 }
 
 struct Genre: JSONDecodable{
