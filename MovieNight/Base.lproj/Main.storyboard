@@ -13,7 +13,7 @@
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -80,7 +80,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="FFh-FT-7hR" kind="show" id="T1S-rY-SbA"/>
+                                    <action selector="selectFoxPreferences:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P5z-fB-Xgr"/>
                                 </connections>
                             </button>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="aDW-XR-Qef">
@@ -90,14 +90,14 @@
                                     <constraint firstAttribute="height" constant="34" id="lp2-aI-QhO"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffm-d7-Tid">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffm-d7-Tid">
                                 <rect key="frame" x="110.66666666666669" y="412.33333333333331" width="193" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Tap to enter  preferences">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="FFh-FT-7hR" kind="show" id="jX1-LW-q1g"/>
+                                    <action selector="selectCrabPreferences:" destination="BYZ-38-t0r" eventType="touchUpInside" id="csn-0w-qte"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -135,7 +135,7 @@
         <!--Genre View Controller-->
         <scene sceneID="WBM-BG-Gln">
             <objects>
-                <viewController id="FFh-FT-7hR" customClass="GenreViewController" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="genreVC" id="FFh-FT-7hR" customClass="GenreViewController" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jR5-3L-ccl"/>
                         <viewControllerLayoutGuide type="bottom" id="ZNQ-xH-VdO"/>
@@ -612,8 +612,5 @@
         <image name="avatar2" width="170" height="170"/>
         <image name="check" width="170" height="170"/>
         <image name="loveDeselected" width="170" height="170"/>
-  </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="jX1-LW-q1g"/>
-    </inferredMetricsTieBreakers>
+    </resources>
 </document>

@@ -18,6 +18,15 @@ enum UserKeys: String {
     case FoxUserGenres
     case FoxUserActors
     case FoxUserMovies
+    
+    case CrabUserGenres
+    case CrabUserActors
+    case CrabUserMovies
+}
+
+enum User {
+    case Fox
+    case Crab
 }
 
 protocol Person {

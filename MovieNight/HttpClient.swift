@@ -20,7 +20,7 @@ enum APIResult<T> {
     case failure(Error)
 }
 
-protocol APIClient {
+protocol HttpClient {
     var session: URLSession { get }
     var configuration: URLSessionConfiguration { get }
     
@@ -28,7 +28,7 @@ protocol APIClient {
     func fetch<T>(request: URLRequest, parse: @escaping (JSON) -> T? , completion: @escaping (APIResult<T>) -> Void)
 }
 
-extension APIClient {
+extension HttpClient {
     func jsonTask(with request: URLRequest, completion: @escaping (JSON?, HTTPURLResponse?, Error?) -> Void) -> URLSessionDataTask {
         let task = session.dataTask(with: request) { (data, response, error) in
             

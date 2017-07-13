@@ -11,10 +11,11 @@ import UIKit
 class ActorViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var actorTableView: UITableView!
-    var apiClient = MovieNightApiClient()
     var actors = [Actor]()
-    var repository: Repository!
-    var actorsSelected = [Int:String]()
+    let apiClient = Factory.createApiClient()
+    var repository = Factory.createRepository()
+    var selectedActors = [Int:String]()
+    var user = User.Fox
     var hasNextPage: Bool = true {
         didSet {
             self.page += 1
@@ -27,7 +28,6 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         actorTableView.delegate = self
         actorTableView.dataSource = self
-        repository = Factory.createMovieNightRepository()
         
         loadData()
     }
@@ -88,17 +88,25 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func saveSelectedActor(with indexPath: IndexPath) {
         let actorSelectedCell = actorTableView.cellForRow(at: indexPath) as! ActorTableViewCell
-        actorsSelected[indexPath.row] = actorSelectedCell.nameLabel.text!
+        selectedActors[indexPath.row] = actorSelectedCell.nameLabel.text!
     }
     
     func removeSelectedActor(with indexPAth: IndexPath) {
-        actorsSelected.removeValue(forKey: indexPAth.row)
+        selectedActors.removeValue(forKey: indexPAth.row)
     }
     
     // Called when the user taps 'Next' button
     @IBAction func saveActorsSelectedInDisk(_ sender: Any) {
-        repository.save(dictionary: actorsSelected, forKey: UserKeys.FoxUserActors.rawValue)
+        switch user {
+        case .Fox :
+            repository.save(dictionary: selectedActors, forKey: UserKeys.FoxUserActors.rawValue)
+        case .Crab:
+            repository.save(dictionary: selectedActors, forKey: UserKeys.CrabUserActors.rawValue)
+        }
     }
-
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let movieVC = segue.destination as! MovieViewController
+        movieVC.user = user
+    }
 }

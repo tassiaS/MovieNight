@@ -10,8 +10,13 @@ import Foundation
 
 class Factory {
     
-    class func createMovieNightRepository() -> Repository {
+    class func createRepository() -> Repository {
         let movieNightRepository = MovieNightRepository()
         return movieNightRepository
+    }
+    
+    class func createApiClient() -> ApiClient {
+        let movieNightApiCLient = MovieNightApiClient()
+        return movieNightApiCLient
     }
 }

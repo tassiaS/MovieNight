@@ -9,17 +9,19 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+   
+    @IBAction func selectCrabPreferences(_ sender: Any) {
+        showGenreViewController(with: User.Crab)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func selectFoxPreferences(_ sender: Any) {
+        showGenreViewController(with: User.Fox)
     }
-
-
+    
+    func showGenreViewController(with user: User) {
+        let genreVC = self.storyboard?.instantiateViewController(withIdentifier: "genreVC") as! GenreViewController
+        genreVC.user = user
+        self.present(genreVC, animated: true, completion: nil)
+    }
 }
 

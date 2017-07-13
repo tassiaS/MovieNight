@@ -38,7 +38,3 @@ extension Repository {
         return unarchivedObject as? [Int: String]
     }
 }
-
-struct MovieNightRepository : Repository {
-    var userDefault = UserDefaults.standard
-}
