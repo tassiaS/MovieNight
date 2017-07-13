@@ -120,9 +120,6 @@ final class MovieNightApiClient: APIClient {
             }
         }, completion: completion)
     }
-
-
-    
 }
 
 

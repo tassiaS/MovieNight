@@ -13,18 +13,20 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     @IBOutlet weak var genreTableView: UITableView!
     var genres = [Genre]()
     let apiClient = MovieNightApiClient()
+    var repository: Repository!
+    var genresSelected = [Int:String]()
     var hasNextPage: Bool = true {
         didSet {
             self.page += 1
         }
     }
     var page = 1
-
-
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         genreTableView.delegate = self
         genreTableView.dataSource = self
+        repository = Factory.createMovieNightRepository()
 
         loadData()
     }
@@ -53,6 +55,10 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreIdCell", for: indexPath) as! GenreTableViewCell
         cell.titleLabel.text = genres[indexPath.row].name
+        
+        // Assign the indexPath to the button's tag so the genre selected can be retreived when the button is tapped
+        cell.loveButton.tag = indexPath.row
+
         return cell
     }
     
@@ -63,4 +69,41 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return genres.count
     }
+    
+    @IBAction func didSelectGenre(_ sender: Any) {
+        let loveButton = sender as! UIButton
+        let indexPath = IndexPath(row: loveButton.tag, section: 0)
+        
+        if loveButton.isSelected {
+            loveButton.setImage(UIImage(named: "loveDeselected"), for: .normal)
+            loveButton.isSelected = false
+            removeSelectedGenre(with: indexPath)
+        } else {
+            loveButton.setImage(UIImage(named: "loveSelected"), for: .normal)
+            loveButton.isSelected = true
+            saveSelectedGenre(with: indexPath)
+        }
+    }
+    
+    func saveSelectedGenre(with indexPath: IndexPath) {
+        let genreSelectedCell = genreTableView.cellForRow(at: indexPath) as! GenreTableViewCell
+        genresSelected[indexPath.row] = genreSelectedCell.titleLabel.text!
+    }
+    
+    func removeSelectedGenre(with indexPAth: IndexPath) {
+        genresSelected.removeValue(forKey: indexPAth.row)
+    }
+    
+    // Called when the user taps 'Next' button
+    @IBAction func saveGenresSelectedInDisk(_ sender: Any) {
+        repository.save(dictionary: genresSelected, forKey: UserKeys.FoxUserGenres.rawValue)
+    }
 }
+
+
+
+
+
+
+
+

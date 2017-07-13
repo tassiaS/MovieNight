@@ -160,6 +160,7 @@
                                             <color key="titleColor" white="1" alpha="0.60000002379999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
+                                            <action selector="saveGenresSelectedInDisk:" destination="FFh-FT-7hR" eventType="touchUpInside" id="rOd-fr-4tw"/>
                                             <segue destination="Jc4-o7-ymo" kind="show" id="wqT-QJ-yYt"/>
                                         </connections>
                                     </button>
@@ -207,13 +208,16 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dN-MG-JQJ">
+                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dN-MG-JQJ">
                                                     <rect key="frame" x="16" y="8" width="27" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="RTD-ig-Edd"/>
                                                         <constraint firstAttribute="height" constant="25" id="iOC-o2-pOj"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="love"/>
+                                                    <state key="normal" title="Button" image="loveDeselected"/>
+                                                    <connections>
+                                                        <action selector="didSelectGenre:" destination="FFh-FT-7hR" eventType="touchUpInside" id="SKv-PK-c84"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -281,6 +285,7 @@
                                             <color key="titleColor" white="1" alpha="0.60000002379999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
+                                            <action selector="saveActorsSelectedInDisk:" destination="Jc4-o7-ymo" eventType="touchUpInside" id="PkH-Cq-94x"/>
                                             <segue destination="wL5-NI-gpE" kind="show" id="idp-lH-aXe"/>
                                         </connections>
                                     </button>
@@ -334,7 +339,10 @@
                                                         <constraint firstAttribute="width" constant="27" id="Shz-QI-ph7"/>
                                                         <constraint firstAttribute="height" constant="25" id="uMX-Rf-wO1"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="love"/>
+                                                    <state key="normal" title="Button" image="loveDeselected"/>
+                                                    <connections>
+                                                        <action selector="didSelectActor:" destination="Jc4-o7-ymo" eventType="touchUpInside" id="MzY-qH-Srq"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -403,7 +411,8 @@
                                             <color key="titleColor" white="1" alpha="0.60000002379999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="zka-ST-2af" kind="show" identifier="showResults" id="nhE-5B-Mdb"/>
+                                            <action selector="saveMoviesSelectedInDisk:" destination="wL5-NI-gpE" eventType="touchUpInside" id="cKp-Ue-5fE"/>
+                                            <segue destination="zka-ST-2af" kind="show" id="IMA-98-nVd"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -456,7 +465,10 @@
                                                         <constraint firstAttribute="width" constant="27" id="sXz-hC-gHs"/>
                                                         <constraint firstAttribute="height" constant="25" id="xdy-DL-xUZ"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="love"/>
+                                                    <state key="normal" title="Button" image="loveDeselected"/>
+                                                    <connections>
+                                                        <action selector="didSelectMovie:" destination="wL5-NI-gpE" eventType="touchUpInside" id="cew-0N-x4Q"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -521,6 +533,9 @@
                                     <state key="normal" title="Done">
                                         <color key="titleColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <segue destination="BYZ-38-t0r" kind="show" id="xuS-Do-81U"/>
+                                    </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DDc-QV-AVY" userLabel="topBarResultView">
                                     <rect key="frame" x="0.0" y="1" width="414" height="20"/>
@@ -589,14 +604,15 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4tT-TN-YBh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3342.0289855072465" y="138.58695652173915"/>
+            <point key="canvasLocation" x="1687" y="906"/>
         </scene>
     </scenes>
     <resources>
         <image name="avatar1" width="170" height="170"/>
         <image name="avatar2" width="170" height="170"/>
         <image name="check" width="170" height="170"/>
-    </resources>
+        <image name="loveDeselected" width="170" height="170"/>
+  </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jX1-LW-q1g"/>
     </inferredMetricsTieBreakers>

@@ -13,6 +13,13 @@ protocol JSONDecodable {
     init?(JSON: [String: AnyObject])
 }
 
+
+enum UserKeys: String {
+    case FoxUserGenres
+    case FoxUserActors
+    case FoxUserMovies
+}
+
 protocol Person {
     var name: String { get }
     var movies: [Movie]? { get }
@@ -34,18 +41,23 @@ struct Movie : JSONDecodable {
     var title: String
     var releaseDate: String?
     var voteAverage: Int?
+    var id: Int
+    
+    init(title: String, id: Int) {
+        self.title = title
+        self.id = id
+    }
     
     init?(JSON: [String: AnyObject]) {
         guard let name = JSON["title"] as? String else {
             return nil
         }
+        guard let id = JSON["id"] as? Int else {
+            return nil
+        }
         self.title = name
+        self.id = id
     }
-
-struct Director: Person {
-    var name: String
-    var movies: [Movie]?
-}
 
 struct Genre: JSONDecodable{
     var name: String
