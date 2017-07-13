@@ -612,7 +612,7 @@
         <image name="avatar2" width="170" height="170"/>
         <image name="check" width="170" height="170"/>
         <image name="loveDeselected" width="170" height="170"/>
-    </resources>
+  </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jX1-LW-q1g"/>
     </inferredMetricsTieBreakers>
