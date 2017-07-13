@@ -13,8 +13,8 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var movieTableView: UITableView!
     var movies = [Movie]()
     var selectedMovies = [Int: String]()
-    let apiClient = Factory.createMovieNightApiClient()
-    var repository = Factory.createMovieNightRepository()
+    let apiClient = Factory.createApiClient()
+    var repository = Factory.createRepository()
     var page = 1
     var user = User.Fox
     var hasNextPage: Bool = true {

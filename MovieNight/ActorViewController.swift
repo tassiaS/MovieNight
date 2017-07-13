@@ -12,8 +12,8 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     @IBOutlet weak var actorTableView: UITableView!
     var actors = [Actor]()
-    let apiClient = Factory.createMovieNightApiClient()
-    var repository = Factory.createMovieNightRepository()
+    let apiClient = Factory.createApiClient()
+    var repository = Factory.createRepository()
     var selectedActors = [Int:String]()
     var user = User.Fox
     var hasNextPage: Bool = true {

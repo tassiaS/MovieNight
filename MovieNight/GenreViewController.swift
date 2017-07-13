@@ -12,8 +12,8 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var genreTableView: UITableView!
     var genres = [Genre]()
-    let apiClient = Factory.createMovieNightApiClient()
-    var repository = Factory.createMovieNightRepository()
+    let apiClient = Factory.createApiClient()
+    var repository = Factory.createRepository()
     var selectedGenres = [Int:String]()
     var user = User.Fox
     var hasNextPage: Bool = true {
