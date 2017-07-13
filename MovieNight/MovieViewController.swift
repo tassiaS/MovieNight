@@ -16,6 +16,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var moviesSelected = [Int: String]()
     var repository: Repository!
     var page = 1
+    var user = User.Fox
     var hasNextPage: Bool = true {
         didSet {
             self.page += 1
@@ -97,14 +98,17 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // Called when the user taps the 'Done' button
     @IBAction func saveMoviesSelectedInDisk(_ sender: Any) {
-        repository.save(dictionary: moviesSelected, forKey: UserKeys.FoxUserMovies.rawValue)
+        switch user {
+        case .Fox :
+            repository.save(dictionary: moviesSelected, forKey: UserKeys.FoxUserMovies.rawValue)
+        case .Crab:
+            repository.save(dictionary: moviesSelected, forKey: UserKeys.CrabUserMovies.rawValue)
+        }
     
-//        let savedDictionary1 = repository.retrieveDictionary(withKey: "foxUserMovies") // Retrieve
+//        let savedDictionary1 = repository.retrieveDictionary(withKey: UserKeys.CrabUserGenres.rawValue) // Retrieve
 //        repository.userDefault.synchronize()
 //        print("saveDict\(String(describing: savedDictionary1))")
     }
-    
-    
 }
 
 

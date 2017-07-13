@@ -15,6 +15,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     let apiClient = MovieNightApiClient()
     var repository: Repository!
     var genresSelected = [Int:String]()
+    var user = User.Fox
     var hasNextPage: Bool = true {
         didSet {
             self.page += 1
@@ -96,7 +97,17 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     
     // Called when the user taps 'Next' button
     @IBAction func saveGenresSelectedInDisk(_ sender: Any) {
-        repository.save(dictionary: genresSelected, forKey: UserKeys.FoxUserGenres.rawValue)
+        switch user {
+            case .Fox :
+                repository.save(dictionary: genresSelected, forKey: UserKeys.FoxUserGenres.rawValue)
+            case .Crab:
+                repository.save(dictionary: genresSelected, forKey: UserKeys.CrabUserGenres.rawValue)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let actorVC = segue.destination as! ActorViewController
+        actorVC.user = user
     }
 }
 

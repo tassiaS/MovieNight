@@ -15,6 +15,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     var actors = [Actor]()
     var repository: Repository!
     var actorsSelected = [Int:String]()
+    var user = User.Fox
     var hasNextPage: Bool = true {
         didSet {
             self.page += 1
@@ -97,8 +98,16 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // Called when the user taps 'Next' button
     @IBAction func saveActorsSelectedInDisk(_ sender: Any) {
-        repository.save(dictionary: actorsSelected, forKey: UserKeys.FoxUserActors.rawValue)
+        switch user {
+        case .Fox :
+            repository.save(dictionary: actorsSelected, forKey: UserKeys.FoxUserActors.rawValue)
+        case .Crab:
+            repository.save(dictionary: actorsSelected, forKey: UserKeys.CrabUserActors.rawValue)
+        }
     }
-
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let movieVC = segue.destination as! MovieViewController
+        movieVC.user = user
+    }
 }
