@@ -97,7 +97,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // Called when the user taps the 'Done' button
     @IBAction func saveMoviesSelectedInDisk(_ sender: Any) {
-        repository.save(dictionary: moviesSelected, forKey: "foxUserMovies")
+        repository.save(dictionary: moviesSelected, forKey: UserKeys.FoxUserMovies.rawValue)
     
 //        let savedDictionary1 = repository.retrieveDictionary(withKey: "foxUserMovies") // Retrieve
 //        repository.userDefault.synchronize()

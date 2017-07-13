@@ -97,7 +97,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // Called when the user taps 'Next' button
     @IBAction func saveActorsSelectedInDisk(_ sender: Any) {
-        repository.save(dictionary: actorsSelected, forKey: "foxUserActors")
+        repository.save(dictionary: actorsSelected, forKey: UserKeys.FoxUserActors.rawValue)
     }
 
 

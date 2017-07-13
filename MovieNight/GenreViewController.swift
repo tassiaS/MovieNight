@@ -96,7 +96,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     
     // Called when the user taps 'Next' button
     @IBAction func saveGenresSelectedInDisk(_ sender: Any) {
-        repository.save(dictionary: genresSelected, forKey: "foxUserGenres")
+        repository.save(dictionary: genresSelected, forKey: UserKeys.FoxUserGenres.rawValue)
     }
 }
 

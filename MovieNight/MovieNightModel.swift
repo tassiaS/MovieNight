@@ -14,6 +14,11 @@ protocol JSONDecodable {
     init?(JSON: [String: AnyObject])
 }
 
+enum UserKeys: String {
+    case FoxUserGenres
+    case FoxUserActors
+    case FoxUserMovies
+}
 
 protocol People {
     var name: String { get }
