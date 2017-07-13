@@ -14,4 +14,9 @@ class Factory {
         let movieNightRepository = MovieNightRepository()
         return movieNightRepository
     }
+    
+    class func createMovieNightApiClient() -> ApiClient {
+        let movieNightApiCLient = MovieNightApiClient()
+        return movieNightApiCLient
+    }
 }

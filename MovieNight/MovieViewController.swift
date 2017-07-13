@@ -11,10 +11,10 @@ import UIKit
 class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
     @IBOutlet weak var movieTableView: UITableView!
-    var apiClient = MovieNightApiClient()
     var movies = [Movie]()
-    var moviesSelected = [Int: String]()
-    var repository: Repository!
+    var selectedMovies = [Int: String]()
+    let apiClient = Factory.createMovieNightApiClient()
+    var repository = Factory.createMovieNightRepository()
     var page = 1
     var user = User.Fox
     var hasNextPage: Bool = true {
@@ -27,7 +27,6 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         movieTableView.delegate = self
         movieTableView.dataSource = self
-        repository = Factory.createMovieNightRepository()
         
         loadData()
     }
@@ -89,20 +88,20 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func saveSelectedMovie(with indexPath: IndexPath) {
         let movieSelectedCell = movieTableView.cellForRow(at: indexPath) as! MovieTableViewCell
-        moviesSelected[movieSelectedCell.id] = movieSelectedCell.titleLabel.text!
+        selectedMovies[movieSelectedCell.id] = movieSelectedCell.titleLabel.text!
     }
     
     func removeSelectedMovie(with indexPAth: IndexPath) {
-        moviesSelected.removeValue(forKey: indexPAth.row)
+        selectedMovies.removeValue(forKey: indexPAth.row)
     }
     
     // Called when the user taps the 'Done' button
     @IBAction func saveMoviesSelectedInDisk(_ sender: Any) {
         switch user {
         case .Fox :
-            repository.save(dictionary: moviesSelected, forKey: UserKeys.FoxUserMovies.rawValue)
+            repository.save(dictionary: selectedMovies, forKey: UserKeys.FoxUserMovies.rawValue)
         case .Crab:
-            repository.save(dictionary: moviesSelected, forKey: UserKeys.CrabUserMovies.rawValue)
+            repository.save(dictionary: selectedMovies, forKey: UserKeys.CrabUserMovies.rawValue)
         }
     
 //        let savedDictionary1 = repository.retrieveDictionary(withKey: UserKeys.CrabUserGenres.rawValue) // Retrieve

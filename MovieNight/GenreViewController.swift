@@ -12,9 +12,9 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var genreTableView: UITableView!
     var genres = [Genre]()
-    let apiClient = MovieNightApiClient()
-    var repository: Repository!
-    var genresSelected = [Int:String]()
+    let apiClient = Factory.createMovieNightApiClient()
+    var repository = Factory.createMovieNightRepository()
+    var selectedGenres = [Int:String]()
     var user = User.Fox
     var hasNextPage: Bool = true {
         didSet {
@@ -27,7 +27,6 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         genreTableView.delegate = self
         genreTableView.dataSource = self
-        repository = Factory.createMovieNightRepository()
 
         loadData()
     }
@@ -88,20 +87,21 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     
     func saveSelectedGenre(with indexPath: IndexPath) {
         let genreSelectedCell = genreTableView.cellForRow(at: indexPath) as! GenreTableViewCell
-        genresSelected[indexPath.row] = genreSelectedCell.titleLabel.text!
+        selectedGenres[indexPath.row] = genreSelectedCell.titleLabel.text!
     }
     
     func removeSelectedGenre(with indexPAth: IndexPath) {
-        genresSelected.removeValue(forKey: indexPAth.row)
+        selectedGenres.removeValue(forKey: indexPAth.row)
     }
     
     // Called when the user taps 'Next' button
     @IBAction func saveGenresSelectedInDisk(_ sender: Any) {
+        
         switch user {
             case .Fox :
-                repository.save(dictionary: genresSelected, forKey: UserKeys.FoxUserGenres.rawValue)
+                repository.save(dictionary: selectedGenres, forKey: UserKeys.FoxUserGenres.rawValue)
             case .Crab:
-                repository.save(dictionary: genresSelected, forKey: UserKeys.CrabUserGenres.rawValue)
+                repository.save(dictionary: selectedGenres, forKey: UserKeys.CrabUserGenres.rawValue)
         }
     }
     

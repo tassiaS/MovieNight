@@ -65,7 +65,7 @@ enum MovieNightEndpoint: Endpoint {
     }
 }
 
-final class MovieNightApiClient: APIClient {
+final class MovieNightApiClient: ApiClient, HttpClient {
     var configuration: URLSessionConfiguration
     lazy var session: URLSession = {
         return URLSession(configuration: self.configuration)

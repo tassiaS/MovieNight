@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieNight/GenreViewController.swift"
-            timestampString = "521643190.208696"
+            timestampString = "521671665.803341"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "didSelectGenre(_:)"
             landmarkType = "7">
          </BreakpointContent>
