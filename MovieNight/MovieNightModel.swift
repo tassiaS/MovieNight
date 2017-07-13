@@ -9,10 +9,10 @@
 import Foundation
 
 //Model
-
 protocol JSONDecodable {
     init?(JSON: [String: AnyObject])
 }
+
 
 enum UserKeys: String {
     case FoxUserGenres
@@ -29,12 +29,12 @@ enum User {
     case Crab
 }
 
-protocol People {
+protocol Person {
     var name: String { get }
     var movies: [Movie]? { get }
 }
 
-struct Actor: People, JSONDecodable {
+struct Actor: Person, JSONDecodable {
     var name: String
     var movies: [Movie]?
     
@@ -67,9 +67,6 @@ struct Movie : JSONDecodable {
         self.title = name
         self.id = id
     }
-
-
-}
 
 struct Genre: JSONDecodable{
     var name: String
