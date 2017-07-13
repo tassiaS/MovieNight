@@ -11,4 +11,6 @@ import UIKit
 class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var loveButton: UIButton!
+    
+    var id: Int = 0
 }

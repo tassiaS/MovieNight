@@ -12,7 +12,21 @@ class ResultTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
 
+    }
+    
+    func loadData() {
+        guard let data = UserDefaults.standard.object(forKey: "user1") else {
+            return print("no data")
+        }
+        
+        // Check if retrieved data has correct type
+        guard let retrievedData = data as? Data else {
+            return print("no correct type")
+        }
+        
+        print(retrievedData)
     }
     
     // MARK: - Table view data source

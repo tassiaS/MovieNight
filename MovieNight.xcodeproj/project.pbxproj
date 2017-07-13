@@ -25,6 +25,8 @@
 		D26F93E81F0D8A5700E6078E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D26F93E61F0D8A5700E6078E /* LaunchScreen.storyboard */; };
 		D26F93F31F0D8A5700E6078E /* MovieNightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F93F21F0D8A5700E6078E /* MovieNightTests.swift */; };
 		D26F93FE1F0D8A5700E6078E /* MovieNightUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26F93FD1F0D8A5700E6078E /* MovieNightUITests.swift */; };
+		D28407281F1756D90093909A /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28407271F1756D90093909A /* Repository.swift */; };
+		D284072C1F176EBD0093909A /* MovieNightFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D284072B1F176EBD0093909A /* MovieNightFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		D26F93F91F0D8A5700E6078E /* MovieNightUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieNightUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D26F93FD1F0D8A5700E6078E /* MovieNightUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieNightUITests.swift; sourceTree = "<group>"; };
 		D26F93FF1F0D8A5700E6078E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D28407271F1756D90093909A /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		D284072B1F176EBD0093909A /* MovieNightFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieNightFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 				D26E7DEF1F15623B009FF237 /* APIClient.swift */,
 				D26E7DF11F1562E7009FF237 /* MovieNightApiClient.swift */,
 				D258BF241F0E3B41004FD0B9 /* MovieNightModel.swift */,
+				D28407271F1756D90093909A /* Repository.swift */,
+				D284072B1F176EBD0093909A /* MovieNightFactory.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -135,8 +141,8 @@
 				D26E7DD21F126C12009FF237 /* GenreTableViewCell.swift */,
 				D26E7DDC1F127159009FF237 /* ActorViewController.swift */,
 				D26E7DDA1F12714A009FF237 /* ActorTableViewCell.swift */,
-				D26E7DD81F12713B009FF237 /* MovieTableViewCell.swift */,
 				D26E7DF31F156468009FF237 /* MovieViewController.swift */,
+				D26E7DD81F12713B009FF237 /* MovieTableViewCell.swift */,
 				D26E7DE01F1372D7009FF237 /* ResultTableViewCell.swift */,
 				D26E7DF41F156468009FF237 /* ResultTableViewController.swift */,
 				D26F93E11F0D8A5700E6078E /* Main.storyboard */,
@@ -305,11 +311,13 @@
 				D26E7DE11F1372D7009FF237 /* ResultTableViewCell.swift in Sources */,
 				D26F93E01F0D8A5700E6078E /* HomeViewController.swift in Sources */,
 				D26E7DF61F156468009FF237 /* ResultTableViewController.swift in Sources */,
+				D284072C1F176EBD0093909A /* MovieNightFactory.swift in Sources */,
 				D26E7DD51F126D00009FF237 /* GenreViewController.swift in Sources */,
 				D26E7DDD1F127159009FF237 /* ActorViewController.swift in Sources */,
 				D26F93DE1F0D8A5700E6078E /* AppDelegate.swift in Sources */,
 				D258BF251F0E3B41004FD0B9 /* MovieNightModel.swift in Sources */,
 				D26E7DD31F126C12009FF237 /* GenreTableViewCell.swift in Sources */,
+				D28407281F1756D90093909A /* Repository.swift in Sources */,
 				D26E7DF01F15623B009FF237 /* APIClient.swift in Sources */,
 				D26E7DD91F12713B009FF237 /* MovieTableViewCell.swift in Sources */,
 				D26E7DDB1F12714A009FF237 /* ActorTableViewCell.swift in Sources */,
