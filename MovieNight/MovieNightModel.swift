@@ -67,8 +67,9 @@ struct Movie : JSONDecodable {
         self.title = name
         self.id = id
     }
+}
 
-struct Genre: JSONDecodable{
+struct Genre: JSONDecodable {
     var name: String
     var movies: [Movie]?
     
@@ -79,3 +80,4 @@ struct Genre: JSONDecodable{
         self.name = name
     }
 }
+
