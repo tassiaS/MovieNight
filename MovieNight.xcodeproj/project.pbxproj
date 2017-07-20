@@ -29,6 +29,7 @@
 		D284072C1F176EBD0093909A /* MovieNightFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D284072B1F176EBD0093909A /* MovieNightFactory.swift */; };
 		D291460F1F180A5A00414DCA /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291460E1F180A5A00414DCA /* ApiClient.swift */; };
 		D29146111F180A9800414DCA /* MovieNightRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29146101F180A9800414DCA /* MovieNightRepository.swift */; };
+		D2EBD9491F1A8E850006C0C3 /* MovieMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EBD9481F1A8E850006C0C3 /* MovieMatcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		D284072B1F176EBD0093909A /* MovieNightFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieNightFactory.swift; sourceTree = "<group>"; };
 		D291460E1F180A5A00414DCA /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		D29146101F180A9800414DCA /* MovieNightRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieNightRepository.swift; sourceTree = "<group>"; };
+		D2EBD9481F1A8E850006C0C3 /* MovieMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieMatcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				D29146101F180A9800414DCA /* MovieNightRepository.swift */,
 				D284072B1F176EBD0093909A /* MovieNightFactory.swift */,
 				D258BF241F0E3B41004FD0B9 /* MovieNightModel.swift */,
+				D2EBD9481F1A8E850006C0C3 /* MovieMatcher.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				D26E7DF21F1562E7009FF237 /* MovieNightApiClient.swift in Sources */,
 				D26E7DE11F1372D7009FF237 /* ResultTableViewCell.swift in Sources */,
 				D26F93E01F0D8A5700E6078E /* HomeViewController.swift in Sources */,
+				D2EBD9491F1A8E850006C0C3 /* MovieMatcher.swift in Sources */,
 				D29146111F180A9800414DCA /* MovieNightRepository.swift in Sources */,
 				D291460F1F180A5A00414DCA /* ApiClient.swift in Sources */,
 				D26E7DF61F156468009FF237 /* ResultTableViewController.swift in Sources */,

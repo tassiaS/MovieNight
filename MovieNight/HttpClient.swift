@@ -77,9 +77,13 @@ extension HttpClient {
                     return
                 }
                 
+                // Hard to read - try to improve it
                 if let result = parse(json) {
                     if let page = json["page"] as? Int, let totalPages = json["total_pages"] as? Int {
                         if page != totalPages {
+                            completion(APIResult.success((result,hasNextPage)))
+                        } else {
+                            hasNextPage = false
                             completion(APIResult.success((result,hasNextPage)))
                         }
                     } else {

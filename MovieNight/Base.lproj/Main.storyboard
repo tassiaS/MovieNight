@@ -594,6 +594,10 @@
                                         <constraint firstItem="he1-M2-MpN" firstAttribute="leading" secondItem="o5A-aD-Rce" secondAttribute="leadingMargin" constant="-8" id="lJZ-AT-BYI"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="xH2-NM-scm" id="dDt-Ub-FMf"/>
+                                    <outlet property="yearLabel" destination="Ytv-sd-Uaz" id="Hmo-br-T7B"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

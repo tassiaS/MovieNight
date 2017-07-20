@@ -36,7 +36,9 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func fetchMovies(with page: Int) {
-        apiClient.fetchMovies(page: page) { [weak self] (results) in
+        let endpoint = MovieNightEndpoint.Movie(page: String(page))
+        
+        apiClient.fetchMovies(endpoint: endpoint) { [weak self] (results) in
             switch results {
                 case .failure(let error) :
                     print(error)
