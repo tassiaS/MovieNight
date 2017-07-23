@@ -44,7 +44,7 @@ class ResultTableViewController: UITableViewController {
         crabGenres.append(genre4)
         
         let actor1 = Actor(name: "Andy Serkis", id:  28)
-        let actor2 = Actor(name: "Henry Cavill", id: 1099)
+        let actor2 = Actor(name: "Henry Cavill", id: 10990)
         var foxActors = [Actor]()
         foxActors.append(actor1)
         foxActors.append(actor2)

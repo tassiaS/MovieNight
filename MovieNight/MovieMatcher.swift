@@ -16,7 +16,6 @@ class MovieNightMatcher: Matcher {
     
     var apiCLient = Factory.createApiClient()
     var recommendedMovies = [[Movie]]()
-    var moviesId = [String]()
     var moviesMatchedByGenre: [Movie] = [Movie]()
     var moviesMatchedByActor: [Movie] = [Movie]()
     var allRecommendedMovies = [Movie]()
@@ -28,10 +27,10 @@ class MovieNightMatcher: Matcher {
         let moviesSelected = foxMovies + crabMovies
         
         // First: get movies recommendations from user's movies selections
-        getMovieRecommendations(from: moviesSelected, completionHandler: {
+        getMovieRecommendations(from: moviesSelected, completionHandler: { movies in
             
             //convert to [Movies] instead of [[Movie]]
-            self.allRecommendedMovies = Array(self.recommendedMovies.joined())
+            self.allRecommendedMovies = Array(movies.joined())
             
             // Second: check if the users have a genre or actor in common
             let equalGenres:[Genre]? = self.checkForEqualElements(of: foxGenres, and: crabGenres)
@@ -72,6 +71,7 @@ class MovieNightMatcher: Matcher {
                         }
                     }
                     
+                    // Can be called to show the results only after all the credits were checked
                     DispatchQueue.main.async {
                         if !(self.matchedMoviesByGenreAndActor.isEmpty) {
                             completionHandler(self.matchedMoviesByGenreAndActor.uniq())
@@ -87,28 +87,19 @@ class MovieNightMatcher: Matcher {
         })
     }
     
-    private func getMovieRecommendations(from movies: [Movie], completionHandler: @escaping ()-> Void) {
-        
+    private func getMovieRecommendations(from movies: [Movie], completionHandler: @escaping (_ allRecommendedMovies: [[Movie]])-> Void) {
         let group = DispatchGroup()
-        
-        for movie in movies {
-            moviesId.append(String(movie.id))
-        }
-        
-        var endpoints = [MovieNightEndpoint]()
-        for id in moviesId {
-            let endpoint = MovieNightEndpoint.MovieRecommendations(id: id)
-            endpoints.append(endpoint)
-        }
+        let moviesId = movies.map { String($0.id) }
+        let endpoints = moviesId.map { MovieNightEndpoint.MovieRecommendations(id: $0) }
         
         for endpoint in endpoints {
             group.enter()
             apiCLient.fetchMovies(endpoint: endpoint, completion: { (result) in
                 switch result {
-                case .failure(let error):
-                    print(error)
-                case .success(let resource , _):
-                    self.recommendedMovies.append(resource)
+                    case .failure(let error):
+                        print(error)
+                    case .success(let resource , _):
+                        self.recommendedMovies.append(resource)
                 }
                 group.leave()
             })
@@ -116,7 +107,7 @@ class MovieNightMatcher: Matcher {
         
         group.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
             print("All async calls were run!")
-            completionHandler()
+            completionHandler(self.recommendedMovies)
         }
     }
     
@@ -128,37 +119,29 @@ class MovieNightMatcher: Matcher {
 
     private func getCredits(of movies: [Movie], completionHandler: @escaping (_ moviesCredits: [[Credit]]) -> Void) {
         let group = DispatchGroup()
-        var endpoints = [MovieNightEndpoint]()
-        
-        for movie in movies {
-            moviesId.append(String(movie.id))
-        }
-        
-        for id in moviesId {
-            let endpoint = MovieNightEndpoint.MovieCredits(id: id)
-            endpoints.append(endpoint)
-        }
+        let moviesId = movies.map { String($0.id) }
+        let endpoints = moviesId.map { MovieNightEndpoint.MovieCredits(id: $0) }
         
         for endpoint in endpoints {
             group.enter()
             apiCLient.fetchMovieCredits(endpoint: endpoint, completion: { (result) in
                 switch result {
-                case .failure(let error):
-                    print(error)
-                case .success(let resource , _):
-                    self.moviesCredits.append(resource)
+                    case .failure(let error):
+                        print(error)
+                    case .success(let resource , _):
+                        self.moviesCredits.append(resource)
                 }
                 group.leave()
             })
         }
         
         group.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
-            print("All async calls were run!")
             completionHandler(self.moviesCredits)
         }
     }
 }
 
+// Remove duplications
 extension Sequence where Iterator.Element: Hashable {
     func uniq() -> [Iterator.Element] {
         var seen = Set<Iterator.Element>()
