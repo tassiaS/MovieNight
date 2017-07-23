@@ -60,33 +60,30 @@ struct Actor: JSONDecodable, Equatable {
     }
 }
 
-struct MovieCredits: JSONDecodable {
+struct Credit {
     var movieId: Int
-    var actors = [String]()
+    var actor: Actor
     
-    init?(JSON: [String: AnyObject]) {
-        guard let cast = JSON["cast"] as? [[String : Any]] else {
+    init?(JSON: [String: AnyObject], movieId: Int) {
+        guard let name = JSON["name"] as? String else {
             return nil
         }
         guard let id = JSON["id"] as? Int else {
             return nil
         }
         
-        for actor in cast {
-         self.actors.append(actor["name"] as! String)
-        }
-        
-        self.movieId = id
+        self.actor = Actor(name: name, id: id)
+        self.movieId = movieId
     }
-    
 }
 
-struct Movie : JSONDecodable {
+struct Movie : JSONDecodable, Hashable, Equatable {
     var title: String
     var releaseDate: String?
     var voteAverage: Int?
     var genreIds: [Int]
     var id: Int
+    var hashValue : Int { return self.id }
     
     init(title: String, id: Int, genreIds: [Int]) {
         self.title = title
@@ -107,6 +104,10 @@ struct Movie : JSONDecodable {
         self.title = name
         self.id = id
         self.genreIds = genreIds
+    }
+    
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 

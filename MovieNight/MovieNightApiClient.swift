@@ -134,16 +134,16 @@ final class MovieNightApiClient: ApiClient, HttpClient {
         }, completion: completion)
     }
     
-    func fetchMovieCredits(endpoint: Endpoint, completion: @escaping (APIResult<[MovieCredits]>) -> Void) {
+    func fetchMovieCredits(endpoint: Endpoint, completion: @escaping (APIResult<[Credit]>) -> Void) {
         
         let request = endpoint.request
         
-        fetch(request: request, parse: { (json) -> [MovieCredits]? in
-            guard let movieCredits = json["cast"] as? [[String:AnyObject]] else {
+        fetch(request: request, parse: { (json) -> [Credit]? in
+            guard let movieCredits = json["cast"] as? [[String:AnyObject]], let movieId = json["id"] as? Int else {
                 return nil
             }
             return movieCredits.flatMap {
-                return MovieCredits(JSON: $0)
+                return Credit(JSON: $0, movieId: movieId)
             }
         }, completion: completion)
     }

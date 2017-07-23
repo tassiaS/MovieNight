@@ -21,61 +21,44 @@ class ResultTableViewController: UITableViewController {
     
     func loadData() {
         
-        var user1movies = [Movie]()
-        user1movies.append(Movie(title: "Despicable Me 3", id: 324852, genreIds: [878,12,16,35,10751]))
-        user1movies.append(Movie(title: "Beauty and the Beast", id: 321612, genreIds: [10751,14,10749]))
+        var foxMovies = [Movie]()
+        foxMovies.append(Movie(title: "Despicable Me 3", id: 324852, genreIds: [878,12,16,35,10751]))
+        foxMovies.append(Movie(title: "Beauty and the Beast", id: 321612, genreIds: [10751,14,10749]))
         
-        var user2movies = [Movie]()
-        user2movies.append(Movie(title: "Dawn of the Planet of the Apes", id: 119450, genreIds: [878,28,18,53]))
-        user2movies.append(Movie(title: "Spider-Man: Homecoming", id: 315635, genreIds: [28,12,878]))
-        
-        var movies = [[Movie]]()
-        movies.append(user1movies)
-        movies.append(user2movies)
+        var crabMovies = [Movie]()
+        crabMovies.append(Movie(title: "Dawn of the Planet of the Apes", id: 119450, genreIds: [878,28,18,53]))
+        crabMovies.append(Movie(title: "Spider-Man: Homecoming", id: 315635, genreIds: [28,12,878]))
         
         //test
         
-        var genres = [[Genre]]()
-        
         let genre1 = Genre(name: "Action", id: 28)
         let genre2 = Genre(name: "Science Fiction", id: 878)
-        var fox = [Genre]()
-        fox.append(genre1)
-        fox.append(genre2)
+        var foxGenres = [Genre]()
+        foxGenres.append(genre1)
+        foxGenres.append(genre2)
         
-        var crab = [Genre]()
+        var crabGenres = [Genre]()
         let genre3 = Genre(name: "Horror", id: 27)
         let genre4 = Genre(name: "Drama", id: 18)
-        crab.append(genre3)
-        crab.append(genre4)
+        crabGenres.append(genre3)
+        crabGenres.append(genre4)
         
-        genres.append(fox)
-        genres.append(crab)
-        
-        var actors = [[Actor]]()
-        
-        let actor1 = Actor(name: "Andy Serkis", id: 1333)
-        let actor2 = Actor(name: "Henry Cavill", id: 73968)
-        var actorF = [Actor]()
-        actorF.append(actor1)
-        actorF.append(actor2)
-        var actor3 = Actor(name: "Emilia Clarke", id: 1223786)
-        var actor4 = Actor(name: "Lena Headey", id: 17286)
-        var actorC = [Actor]()
-        actorC.append(actor3)
-        actorC.append(actor4)
-        
-        actors.append(actorF)
-        actors.append(actorC)
+        let actor1 = Actor(name: "Andy Serkis", id:  28)
+        let actor2 = Actor(name: "Henry Cavill", id: 1099)
+        var foxActors = [Actor]()
+        foxActors.append(actor1)
+        foxActors.append(actor2)
+        let actor3 = Actor(name: "Emilia Clarke", id:  1099)
+        let actor4 = Actor(name: "Lena Headey", id: 10990)
+        var crabActors = [Actor]()
+        crabActors.append(actor3)
+        crabActors.append(actor4)
         
         
-        
-        matcher.matchUserSelections(with : genres, actors: actors, movies: movies, completionHandler: { movies in
+        matcher.matchUserSelections(with: foxGenres, and: crabGenres, and: foxActors, and: crabActors, and: crabMovies, and: foxMovies) { movies in
             self.recommendedMovies = movies
             self.tableView.reloadData()
-            print("The result is \(movies)")
-        })
-        
+        }
         
         guard let data = UserDefaults.standard.object(forKey: "user1") else {
             return print("no data")
