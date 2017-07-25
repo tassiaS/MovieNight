@@ -30,10 +30,6 @@ enum User {
     case Crab
 }
 
-protocol Nameable {
-    var name: String { get }
-}
-
 struct Actor: JSONDecodable, Equatable {
     var name: String
     var id: Int

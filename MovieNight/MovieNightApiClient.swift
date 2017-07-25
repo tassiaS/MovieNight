@@ -118,9 +118,24 @@ final class MovieNightApiClient: ApiClient, HttpClient {
         }, completion: completion)
     }
     
-    func fetchMovies(endpoint: Endpoint, completion: @escaping (APIResult<[Movie]>) -> Void) {
-        
+    func fetchMovies(page: Int, completion: @escaping (APIResult<[Movie]>) -> Void) {
+        let endpoint = MovieNightEndpoint.Movie(page: String(page))
         let request = endpoint.request
+        
+        fetch(request: request, parse: { (json) -> [Movie]? in
+            guard let popularMovies = json["results"] as? [[String:AnyObject]] else {
+                return nil
+            }
+            return popularMovies.flatMap {
+                return Movie(JSON: $0)
+            }
+        }, completion: completion)
+    }
+    
+    func fetchMoviesRecommendations(movieId: String, completion: @escaping (APIResult<[Movie]>) -> Void) {
+        
+        let endpoint = MovieNightEndpoint.MovieRecommendations(id: movieId)
+        let request =  endpoint.request
         
         fetch(request: request, parse: { (json) -> [Movie]? in
             guard let popularMovies = json["results"] as? [[String:AnyObject]] else {
