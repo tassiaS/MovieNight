@@ -18,7 +18,6 @@ class MovieNightMatcher: Matcher {
     var recommendedMovies = [[Movie]]()
     var moviesMatchedByGenre: [Movie] = [Movie]()
     var moviesMatchedByActor: [Movie] = [Movie]()
-    var allRecommendedMovies = [Movie]()
     var moviesCredits = [[Credit]]()
     var matchedMoviesByGenreAndActor: [Movie] = [Movie]()
 
@@ -29,9 +28,6 @@ class MovieNightMatcher: Matcher {
         // First: get movies recommendations from user's movies selections
         getMovieRecommendations(from: moviesSelected, completionHandler: { movies in
             
-            //convert to [Movies] instead of [[Movie]]
-            self.allRecommendedMovies = Array(movies.joined())
-            
             // Second: check if the users have a genre or actor in common
             let equalGenres:[Genre]? = self.checkForEqualElements(of: foxGenres, and: crabGenres)
             let equalActors: [Actor]? = self.checkForEqualElements(of: foxActors, and: crabActors)
@@ -39,20 +35,20 @@ class MovieNightMatcher: Matcher {
             // Third: If the users have a genre in common, then check for recommendedMovies with those genres
             if let genres = equalGenres {
                 for genre in genres {
-                    self.moviesMatchedByGenre = self.allRecommendedMovies.filter { $0.genreIds.contains(genre.id) }
+                    self.moviesMatchedByGenre = movies.filter { $0.genreIds.contains(genre.id) }
                 }
             }
             
             // Fourth: If the users have some actor in common, then check for recommendedMovies with those actors
             if let actors = equalActors {
                 // Get the credits of all recommendedMovies so it is possible to check if one of them have 'the equal actor' in its cast
-                self.getCredits(of: self.allRecommendedMovies, completionHandler: { moviesCredits in
+                self.getCredits(of: movies, completionHandler: { moviesCredits in
                     for credits in moviesCredits {
                         let movieCreditsMatchedByActor = credits.filter { actors.contains($0.actor) }
                         
                         // Ger from allRecommendedMovies only the movies with 'actors matched'
                         for credit in movieCreditsMatchedByActor {
-                            let moviesMatched = self.allRecommendedMovies.filter { $0.id == credit.movieId }
+                            let moviesMatched = movies.filter { $0.id == credit.movieId }
                             for movie in moviesMatched {
                                 self.moviesMatchedByActor.append(movie)
                             }
@@ -78,8 +74,8 @@ class MovieNightMatcher: Matcher {
                             print(self.matchedMoviesByGenreAndActor.count)
                             
                         } else {
-                            completionHandler(self.allRecommendedMovies.uniq())
-                            print(self.allRecommendedMovies.count)
+                            completionHandler(movies.uniq())
+                            print(movies.count)
                         }
                     }
                 })
@@ -87,19 +83,18 @@ class MovieNightMatcher: Matcher {
         })
     }
     
-    private func getMovieRecommendations(from movies: [Movie], completionHandler: @escaping (_ allRecommendedMovies: [[Movie]])-> Void) {
+    private func getMovieRecommendations(from movies: [Movie], completionHandler: @escaping (_ allRecommendedMovies: [Movie])-> Void) {
         let group = DispatchGroup()
         let moviesId = movies.map { String($0.id) }
-        let endpoints = moviesId.map { MovieNightEndpoint.MovieRecommendations(id: $0) }
         
-        for endpoint in endpoints {
+        for id in moviesId {
             group.enter()
-            apiCLient.fetchMovies(endpoint: endpoint, completion: { (result) in
+            apiCLient.fetchMoviesRecommendations(movieId: id, completion: { (result) in
                 switch result {
-                    case .failure(let error):
-                        print(error)
-                    case .success(let resource , _):
-                        self.recommendedMovies.append(resource)
+                case .failure(let error):
+                    print(error)
+                case .success(let resource , _):
+                    self.recommendedMovies.append(resource)
                 }
                 group.leave()
             })
@@ -107,10 +102,10 @@ class MovieNightMatcher: Matcher {
         
         group.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
             print("All async calls were run!")
-            completionHandler(self.recommendedMovies)
+            completionHandler(Array(self.recommendedMovies.joined()).uniq())
         }
     }
-    
+
     private func checkForEqualElements<T: Equatable>(of fox: [T], and crab: [T]) -> [T]? {
         
         let equalFox = fox.filter { crab.contains($0) }

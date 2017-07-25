@@ -80,7 +80,5 @@ class ResultTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultIdCell", for: indexPath) as! ResultTableViewCell
         cell.titleLabel.text = recommendedMovies[indexPath.row].title
         return cell
-        
     }
-    
 }
