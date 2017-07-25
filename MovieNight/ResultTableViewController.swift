@@ -64,10 +64,10 @@ class ResultTableViewController: UITableViewController {
     func getData<T>(with key: String, createObject: (_ value: Int) -> T) -> [T] {
         var array = [T]()
         let dict = repository.retrieveDictionary(with: key)
-        if let movieDict = dict {
-            for (_, value) in movieDict {
-                let movie = createObject(value)
-                array.append(movie)
+        if let dict = dict {
+            for (_, value) in dict {
+                let object = createObject(value)
+                array.append(object)
             }
         }
         repository.userDefault.synchronize()
