@@ -39,6 +39,8 @@ enum MovieNightEndpoint: Endpoint {
     case Genre(page: String)
     case Actor(page: String)
     case Movie(page: String)
+    case MovieRecommendations(id: String)
+    case MovieCredits(id: String)
     
     var baseURL: String {
         return "https://api.themoviedb.org"
@@ -51,21 +53,31 @@ enum MovieNightEndpoint: Endpoint {
                 return "/3/person/popular"
             case .Movie:
                 return "/3/movie/popular"
+            case .MovieRecommendations(let id):
+                return "/3/movie/\(id)/recommendations"
+            case .MovieCredits(let id):
+                return "/3/movie/\(id)/credits"
         }
     }
     
     var parameters: [String : String] {
         var parameters = [String : String]()
+        parameters["api_key"] = "57b213eb9d700e45c3f1ddaa754d7134"
+        
         switch self {
-        case .Actor(let page), .Movie(let page), .Genre(let page) :
-            parameters["api_key"] = "57b213eb9d700e45c3f1ddaa754d7134"
+            case .Actor(let page), .Movie(let page), .Genre(let page):
             parameters["page"] = page
+            return parameters
+        case .MovieRecommendations:
+            return parameters
+        case .MovieCredits:
             return parameters
         }
     }
 }
 
 final class MovieNightApiClient: ApiClient, HttpClient {
+    
     var configuration: URLSessionConfiguration
     lazy var session: URLSession = {
         return URLSession(configuration: self.configuration)
@@ -90,6 +102,7 @@ final class MovieNightApiClient: ApiClient, HttpClient {
             return genres.flatMap {
                 return Genre(JSON: $0)
             }
+            
         }, completion: completion)
     }
     
@@ -120,6 +133,36 @@ final class MovieNightApiClient: ApiClient, HttpClient {
             }
         }, completion: completion)
     }
+    
+    func fetchMoviesRecommendations(movieId: String, completion: @escaping (APIResult<[Movie]>) -> Void) {
+        
+        let endpoint = MovieNightEndpoint.MovieRecommendations(id: movieId)
+        let request =  endpoint.request
+        
+        fetch(request: request, parse: { (json) -> [Movie]? in
+            guard let popularMovies = json["results"] as? [[String:AnyObject]] else {
+                return nil
+            }
+            return popularMovies.flatMap {
+                return Movie(JSON: $0)
+            }
+        }, completion: completion)
+    }
+    
+    func fetchMovieCredits(endpoint: Endpoint, completion: @escaping (APIResult<[Credit]>) -> Void) {
+        
+        let request = endpoint.request
+        
+        fetch(request: request, parse: { (json) -> [Credit]? in
+            guard let movieCredits = json["cast"] as? [[String:AnyObject]], let movieId = json["id"] as? Int else {
+                return nil
+            }
+            return movieCredits.flatMap {
+                return Credit(JSON: $0, movieId: movieId)
+            }
+        }, completion: completion)
+    }
+
 }
 
 

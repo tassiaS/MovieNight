@@ -9,10 +9,11 @@
 import Foundation
 
 //Model
+
+
 protocol JSONDecodable {
     init?(JSON: [String: AnyObject])
 }
-
 
 enum UserKeys: String {
     case FoxUserGenres
@@ -29,32 +30,61 @@ enum User {
     case Crab
 }
 
-protocol Person {
-    var name: String { get }
-    var movies: [Movie]? { get }
-}
-
-struct Actor: Person, JSONDecodable {
+struct Actor: JSONDecodable, Equatable {
     var name: String
-    var movies: [Movie]?
+    var id: Int
+    
+    init(name: String, id: Int) {
+        self.name = name
+        self.id = id
+    }
+
     
     init?(JSON: [String: AnyObject]) {
         guard let name = JSON["name"] as? String else {
             return nil
         }
+        guard let id = JSON["id"] as? Int else {
+            return nil
+        }
         self.name = name
+        self.id = id
+    }
+    
+    static func ==(lhs: Actor, rhs: Actor) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 
-struct Movie : JSONDecodable {
+struct Credit {
+    var movieId: Int
+    var actor: Actor
+    
+    init?(JSON: [String: AnyObject], movieId: Int) {
+        guard let name = JSON["name"] as? String else {
+            return nil
+        }
+        guard let id = JSON["id"] as? Int else {
+            return nil
+        }
+        
+        self.actor = Actor(name: name, id: id)
+        self.movieId = movieId
+    }
+}
+
+struct Movie : JSONDecodable, Hashable, Equatable {
     var title: String
     var releaseDate: String?
     var voteAverage: Int?
+    var genreIds: [Int]
     var id: Int
+    var hashValue : Int { return self.id }
     
-    init(title: String, id: Int) {
+    init(title: String, id: Int, genreIds: [Int]) {
         self.title = title
         self.id = id
+        self.genreIds = genreIds
     }
     
     init?(JSON: [String: AnyObject]) {
@@ -64,20 +94,44 @@ struct Movie : JSONDecodable {
         guard let id = JSON["id"] as? Int else {
             return nil
         }
+        guard let genreIds = JSON["genre_ids"] as? [Int] else {
+            return nil
+        }
         self.title = name
         self.id = id
+        self.genreIds = genreIds
+    }
+    
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 
-struct Genre: JSONDecodable {
+struct Genre: JSONDecodable, Equatable {
     var name: String
-    var movies: [Movie]?
+    var id: Int
+    
+    init(name: String, id: Int) {
+        self.name = name
+        self.id = id
+    }
+
     
     init?(JSON: [String: AnyObject]) {
         guard let name = JSON["name"] as? String else {
             return nil
         }
+        guard let id = JSON["id"] as? Int else {
+            return nil
+        }
         self.name = name
+        self.id = id
+    }
+    
+    static func ==(lhs: Genre, rhs: Genre) -> Bool {
+        return lhs.id == rhs.id
     }
 }
+
+
 
