@@ -101,12 +101,8 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
         switch user {
         case .Fox :
             repository.save(dictionary: selectedActors, for: UserKeys.FoxUserActors.rawValue)
-            let foxActorsDict = repository.retrieveDictionary(with: UserKeys.FoxUserActors.rawValue)
-            //print(foxActorsDict ?? "no Fox movies saved")
         case .Crab:
             repository.save(dictionary: selectedActors, for: UserKeys.CrabUserActors.rawValue)
-            let crabActorsDict = repository.retrieveDictionary(with: UserKeys.CrabUserActors.rawValue)
-            //print(crabActorsDict ?? "no Fox movies saved")
         }
     }
     

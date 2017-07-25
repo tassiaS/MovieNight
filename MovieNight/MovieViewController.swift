@@ -103,20 +103,14 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         switch user {
         case .Fox :
             repository.save(dictionary: selectedMovies, for: UserKeys.FoxUserMovies.rawValue)
-            let foxMoviesDict = repository.retrieveDictionary(with: UserKeys.FoxUserMovies.rawValue)
-            //print(foxMoviesDict ?? "no Fox movies saved")
-
         case .Crab:
             repository.save(dictionary: selectedMovies, for: UserKeys.CrabUserMovies.rawValue)
-            let crabMoviesDict = repository.retrieveDictionary(with: UserKeys.CrabUserMovies.rawValue)
-            //print(crabMoviesDict ?? "no crab actors saved")
         }
-        
         showHomeViewControlle()
     }
     
     func showHomeViewControlle() {
-        var homeVC = storyboard?.instantiateInitialViewController() as! HomeViewController
+        let homeVC = storyboard?.instantiateInitialViewController() as! HomeViewController
         self.present(homeVC, animated: true, completion: nil)
     }
 }
