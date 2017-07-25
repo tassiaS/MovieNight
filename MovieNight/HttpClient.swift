@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public let TREnetworkingErrorDomain = "com.Tassia.MovieNight.NetworkingError"
+public let TREnetworkingErrorDomain = "com.tassia.MovieNight.NetworkingError"
 public let JsonKeyOrElementInvalid: Int = 20
 public let JsonIsNill: Int = 21
 public let JsonConversionInvalid: Int = 22
