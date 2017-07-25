@@ -77,11 +77,11 @@ struct Movie : JSONDecodable, Hashable, Equatable {
     var title: String
     var releaseDate: String?
     var voteAverage: Int?
-    var genreIds: [Int]
+    var genreIds: [Int]?
     var id: Int
     var hashValue : Int { return self.id }
     
-    init(title: String, id: Int, genreIds: [Int]) {
+    init(title: String, id: Int, genreIds: [Int]?) {
         self.title = title
         self.id = id
         self.genreIds = genreIds

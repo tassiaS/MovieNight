@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-public let TREnetworkingErrorDomain = "com.treehouse.Stormy.NetwowrkingError"
+public let TREnetworkingErrorDomain = "com.tassia.MovieNight.NetworkingError"
 public let JsonKeyOrElementInvalid: Int = 20
-public let HTTPResponseFailed: Int = 21
+public let JsonIsNill: Int = 21
+public let JsonConversionInvalid: Int = 22
 typealias JSON = [String: AnyObject]
 
 
@@ -71,8 +72,8 @@ extension HttpClient {
                     return
                 }
                 
-                let error = NSError(domain: TREnetworkingErrorDomain, code: HTTPResponseFailed, userInfo: nil)
                 guard let json = json else {
+                    let error = NSError(domain: TREnetworkingErrorDomain, code: JsonIsNill, userInfo: nil)
                     completion(APIResult.failure(error))
                     return
                 }
@@ -91,6 +92,7 @@ extension HttpClient {
                         completion(APIResult.success((result,hasNextPage)))
                     }
                 } else {
+                    let error = NSError(domain: TREnetworkingErrorDomain, code: JsonConversionInvalid, userInfo: nil)
                     completion(APIResult.failure(error))
                 }
             }

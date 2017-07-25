@@ -59,12 +59,14 @@ class MovieNightMatcher: Matcher {
                         for movie in self.moviesMatchedByGenre {
                             self.matchedMoviesByGenreAndActor.append(movie)
                         }
+                        print("Matched Genre")
                     }
                     
                     if !(self.moviesMatchedByActor.isEmpty) {
                         for movie in self.moviesMatchedByActor {
                             self.matchedMoviesByGenreAndActor.append(movie)
                         }
+                        print("Matched actor")
                     }
                     
                     // Can be called to show the results only after all the credits were checked
@@ -101,7 +103,6 @@ class MovieNightMatcher: Matcher {
         }
         
         group.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
-            print("All async calls were run!")
             completionHandler(Array(self.recommendedMovies.joined()).uniq())
         }
     }
