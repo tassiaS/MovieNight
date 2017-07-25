@@ -12,7 +12,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
    
     @IBOutlet weak var movieTableView: UITableView!
     var movies = [Movie]()
-    var selectedMovies = [Int: String]()
+    var selectedMovies = [Int: Int]()
     let apiClient = Factory.createApiClient()
     var repository = Factory.createRepository()
     var page = 1
@@ -89,8 +89,9 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func saveSelectedMovie(with indexPath: IndexPath) {
-        let movieSelectedCell = movieTableView.cellForRow(at: indexPath) as! MovieTableViewCell
-        selectedMovies[movieSelectedCell.id] = movieSelectedCell.titleLabel.text!
+        //let movieSelectedCell = movieTableView.cellForRow(at: indexPath) as! MovieTableViewCell
+        //selectedMovies[movieSelectedCell.id] = movieSelectedCell.titleLabel.text!
+        selectedMovies[indexPath.row] = movies[indexPath.row].id
     }
     
     func removeSelectedMovie(with indexPAth: IndexPath) {
@@ -101,14 +102,22 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func saveMoviesSelectedInDisk(_ sender: Any) {
         switch user {
         case .Fox :
-            repository.save(dictionary: selectedMovies, forKey: UserKeys.FoxUserMovies.rawValue)
+            repository.save(dictionary: selectedMovies, for: UserKeys.FoxUserMovies.rawValue)
+            let foxMoviesDict = repository.retrieveDictionary(with: UserKeys.FoxUserMovies.rawValue)
+            //print(foxMoviesDict ?? "no Fox movies saved")
+
         case .Crab:
-            repository.save(dictionary: selectedMovies, forKey: UserKeys.CrabUserMovies.rawValue)
+            repository.save(dictionary: selectedMovies, for: UserKeys.CrabUserMovies.rawValue)
+            let crabMoviesDict = repository.retrieveDictionary(with: UserKeys.CrabUserMovies.rawValue)
+            //print(crabMoviesDict ?? "no crab actors saved")
         }
+        
+        showHomeViewControlle()
+    }
     
-//        let savedDictionary1 = repository.retrieveDictionary(withKey: UserKeys.CrabUserGenres.rawValue) // Retrieve
-//        repository.userDefault.synchronize()
-//        print("saveDict\(String(describing: savedDictionary1))")
+    func showHomeViewControlle() {
+        var homeVC = storyboard?.instantiateInitialViewController() as! HomeViewController
+        self.present(homeVC, animated: true, completion: nil)
     }
 }
 

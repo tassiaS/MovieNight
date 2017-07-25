@@ -14,7 +14,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     var genres = [Genre]()
     let apiClient = Factory.createApiClient()
     var repository = Factory.createRepository()
-    var selectedGenres = [Int:String]()
+    var selectedGenres = [Int:Int]()
     var user = User.Fox
     var hasNextPage: Bool = true {
         didSet {
@@ -86,8 +86,11 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     }
     
     func saveSelectedGenre(with indexPath: IndexPath) {
-        let genreSelectedCell = genreTableView.cellForRow(at: indexPath) as! GenreTableViewCell
-        selectedGenres[indexPath.row] = genreSelectedCell.titleLabel.text!
+        //let genreSelectedCell = genreTableView.cellForRow(at: indexPath) as! GenreTableViewCell
+        //selectedGenres[indexPath.row] = genreSelectedCell.titleLabel.text!
+        
+        selectedGenres[indexPath.row] = genres[indexPath.row].id
+
     }
     
     func removeSelectedGenre(with indexPAth: IndexPath) {
@@ -99,9 +102,9 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
         
         switch user {
             case .Fox :
-                repository.save(dictionary: selectedGenres, forKey: UserKeys.FoxUserGenres.rawValue)
+                repository.save(dictionary: selectedGenres, for: UserKeys.FoxUserGenres.rawValue)
             case .Crab:
-                repository.save(dictionary: selectedGenres, forKey: UserKeys.CrabUserGenres.rawValue)
+                repository.save(dictionary: selectedGenres, for: UserKeys.CrabUserGenres.rawValue)
         }
     }
     

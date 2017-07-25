@@ -65,12 +65,10 @@ enum MovieNightEndpoint: Endpoint {
         parameters["api_key"] = "57b213eb9d700e45c3f1ddaa754d7134"
         
         switch self {
-            case .Actor(let page), .Movie(let page), .Genre(let page):
+        case .Actor(let page), .Movie(let page), .Genre(let page):
             parameters["page"] = page
             return parameters
-        case .MovieRecommendations:
-            return parameters
-        case .MovieCredits:
+        case .MovieRecommendations, .MovieCredits:
             return parameters
         }
     }

@@ -11,17 +11,17 @@ import Foundation
 protocol Repository {
     var userDefault: UserDefaults { get }
     
-    func save(dictionary: [Int: String], forKey key: String)
-    func retrieveDictionary(withKey key: String) -> [Int: String]?
+    func save(dictionary: [Int: Int], for key: String)
+    func retrieveDictionary(with key: String) -> [Int: Int]?
 }
 
 extension Repository {
-    func save(dictionary: [Int: String], forKey key: String) {
+    func save(dictionary: [Int: Int], for key: String) {
         let archiver = NSKeyedArchiver.archivedData(withRootObject: dictionary)
         userDefault.set(archiver, forKey: key)
     }
     
-    func retrieveDictionary(withKey key: String) -> [Int: String]? {
+    func retrieveDictionary(with key: String) -> [Int: Int]? {
         
         // Check if data exists
         guard let data = UserDefaults.standard.object(forKey: key) else {
@@ -35,6 +35,6 @@ extension Repository {
         
         // Unarchive data
         let unarchivedObject = NSKeyedUnarchiver.unarchiveObject(with: retrievedData)
-        return unarchivedObject as? [Int: String]
+        return unarchivedObject as? [Int: Int]
     }
 }

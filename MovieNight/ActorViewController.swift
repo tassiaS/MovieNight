@@ -14,7 +14,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     var actors = [Actor]()
     let apiClient = Factory.createApiClient()
     var repository = Factory.createRepository()
-    var selectedActors = [Int:String]()
+    var selectedActors = [Int:Int]()
     var user = User.Fox
     var hasNextPage: Bool = true {
         didSet {
@@ -87,8 +87,9 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func saveSelectedActor(with indexPath: IndexPath) {
-        let actorSelectedCell = actorTableView.cellForRow(at: indexPath) as! ActorTableViewCell
-        selectedActors[indexPath.row] = actorSelectedCell.nameLabel.text!
+        //let actorSelectedCell = actorTableView.cellForRow(at: indexPath) as! ActorTableViewCell
+        //selectedActors[indexPath.row] = actorSelectedCell.nameLabel.text!
+        selectedActors[indexPath.row] = actors[indexPath.row].id
     }
     
     func removeSelectedActor(with indexPAth: IndexPath) {
@@ -99,9 +100,13 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBAction func saveActorsSelectedInDisk(_ sender: Any) {
         switch user {
         case .Fox :
-            repository.save(dictionary: selectedActors, forKey: UserKeys.FoxUserActors.rawValue)
+            repository.save(dictionary: selectedActors, for: UserKeys.FoxUserActors.rawValue)
+            let foxActorsDict = repository.retrieveDictionary(with: UserKeys.FoxUserActors.rawValue)
+            //print(foxActorsDict ?? "no Fox movies saved")
         case .Crab:
-            repository.save(dictionary: selectedActors, forKey: UserKeys.CrabUserActors.rawValue)
+            repository.save(dictionary: selectedActors, for: UserKeys.CrabUserActors.rawValue)
+            let crabActorsDict = repository.retrieveDictionary(with: UserKeys.CrabUserActors.rawValue)
+            //print(crabActorsDict ?? "no Fox movies saved")
         }
     }
     

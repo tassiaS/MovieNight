@@ -39,7 +39,7 @@ class MovieNightMatcher: Matcher {
             // Third: If the users have a genre in common, then check for recommendedMovies with those genres
             if let genres = equalGenres {
                 for genre in genres {
-                    self.moviesMatchedByGenre = self.allRecommendedMovies.filter { $0.genreIds.contains(genre.id) }
+                    self.moviesMatchedByGenre = self.allRecommendedMovies.filter { ($0.genreIds?.contains(genre.id))! }
                 }
             }
             
@@ -63,12 +63,14 @@ class MovieNightMatcher: Matcher {
                         for movie in self.moviesMatchedByGenre {
                             self.matchedMoviesByGenreAndActor.append(movie)
                         }
+                        print("Matched Genre")
                     }
                     
                     if !(self.moviesMatchedByActor.isEmpty) {
                         for movie in self.moviesMatchedByActor {
                             self.matchedMoviesByGenreAndActor.append(movie)
                         }
+                        print("Matched actor")
                     }
                     
                     // Can be called to show the results only after all the credits were checked
@@ -106,7 +108,6 @@ class MovieNightMatcher: Matcher {
         }
         
         group.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
-            print("All async calls were run!")
             completionHandler(self.recommendedMovies)
         }
     }
