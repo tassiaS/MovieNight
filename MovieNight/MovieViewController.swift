@@ -105,13 +105,13 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         case .Crab:
             repository.save(dictionary: selectedMovies, for: UserKeys.CrabUserMovies.rawValue)
         }
-        showHomeViewController()
     }
     
-    func showHomeViewController() {
-        let homeVC = storyboard?.instantiateInitialViewController() as! HomeViewController
-        self.present(homeVC, animated: true, completion: nil)
+    @IBAction func showHomeViewController(_ sender: Any) {
+        performSegue(withIdentifier: "unwindSeguetoHomeVC", sender: self)
     }
+    
+    
 }
 
 

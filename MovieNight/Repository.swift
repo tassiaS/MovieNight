@@ -13,6 +13,7 @@ protocol Repository {
     
     func save(dictionary: [Int: Int], for key: String)
     func retrieveDictionary(with key: String) -> [Int: Int]?
+    func cleanDisk()
 }
 
 extension Repository {
@@ -36,5 +37,11 @@ extension Repository {
         // Unarchive data
         let unarchivedObject = NSKeyedUnarchiver.unarchiveObject(with: retrievedData)
         return unarchivedObject as? [Int: Int]
+    }
+    
+    func cleanDisk() {
+        if let bundle = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundle)
+        }
     }
 }

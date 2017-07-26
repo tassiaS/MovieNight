@@ -35,7 +35,7 @@ class MovieNightMatcher: Matcher {
             // Third: If the users have a genre in common, then check for recommendedMovies with those genres
             if let genres = equalGenres {
                 for genre in genres {
-                    self.moviesMatchedByGenre = movies.filter { $0.genreIds.contains(genre.id) }
+                    self.moviesMatchedByGenre = movies.filter { ($0.genreIds?.contains(genre.id))! }
                 }
             }
             

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D230820C1F27C36D00A1EF49 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230820B1F27C36D00A1EF49 /* Network.swift */; };
 		D258BF251F0E3B41004FD0B9 /* MovieNightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D258BF241F0E3B41004FD0B9 /* MovieNightModel.swift */; };
 		D258BF2F1F0E856B004FD0B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D258BF2E1F0E856B004FD0B9 /* Assets.xcassets */; };
 		D26E7DD31F126C12009FF237 /* GenreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26E7DD21F126C12009FF237 /* GenreTableViewCell.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D230820B1F27C36D00A1EF49 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		D258BF241F0E3B41004FD0B9 /* MovieNightModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieNightModel.swift; sourceTree = "<group>"; };
 		D258BF2E1F0E856B004FD0B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D26E7DD21F126C12009FF237 /* GenreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreTableViewCell.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				D291460E1F180A5A00414DCA /* ApiClient.swift */,
 				D26E7DF11F1562E7009FF237 /* MovieNightApiClient.swift */,
 				D28407271F1756D90093909A /* Repository.swift */,
+				D230820B1F27C36D00A1EF49 /* Network.swift */,
 				D29146101F180A9800414DCA /* MovieNightRepository.swift */,
 				D284072B1F176EBD0093909A /* MovieNightFactory.swift */,
 				D258BF241F0E3B41004FD0B9 /* MovieNightModel.swift */,
@@ -328,6 +331,7 @@
 				D26E7DDD1F127159009FF237 /* ActorViewController.swift in Sources */,
 				D26F93DE1F0D8A5700E6078E /* AppDelegate.swift in Sources */,
 				D258BF251F0E3B41004FD0B9 /* MovieNightModel.swift in Sources */,
+				D230820C1F27C36D00A1EF49 /* Network.swift in Sources */,
 				D26E7DD31F126C12009FF237 /* GenreTableViewCell.swift in Sources */,
 				D28407281F1756D90093909A /* Repository.swift in Sources */,
 				D26E7DF01F15623B009FF237 /* HttpClient.swift in Sources */,
