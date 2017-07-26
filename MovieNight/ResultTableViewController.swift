@@ -86,8 +86,8 @@ class ResultTableViewController: UITableViewController {
     
     @IBAction func didClickDone(_ sender: Any) {
         // clean user's selections from disk
-        if let bundle = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: bundle)
-        }
+        repository.cleanDisk()
+        dismiss(animated: true, completion: nil)
     }
+    
 }

@@ -10,20 +10,24 @@ import UIKit
 
 class HomeViewController: UIViewController {
    
+    @IBOutlet weak var foxCheckedImageView: UIImageView!
+    @IBOutlet weak var crabCheckedImageView: UIImageView!
+    let repository = Factory.createRepository()
+  
+    override func viewWillAppear(_ animated: Bool) {
+        let crabGenres = repository.retrieveDictionary(with: UserKeys.CrabUserGenres.rawValue)
+        let foxGenres = repository.retrieveDictionary(with: UserKeys.FoxUserActors.rawValue)
+        
+        crabCheckedImageView.isHidden = crabGenres == nil
+        foxCheckedImageView.isHidden = foxGenres == nil
+    }
+    
     @IBAction func selectCrabPreferences(_ sender: Any) {
-        if Reachability.isConnectedToNetwork() {
-            showGenreViewController(with: User.Crab)
-        } else {
-            showOfflineError()
-        }
+        checkInternetConnection()
     }
     
     @IBAction func selectFoxPreferences(_ sender: Any) {
-        if Reachability.isConnectedToNetwork() {
-            showGenreViewController(with: User.Fox)
-        } else {
-            showOfflineError()
-        }
+        checkInternetConnection()
     }
     
     func showGenreViewController(with user: User) {
@@ -37,5 +41,18 @@ class HomeViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func checkInternetConnection() {
+        Reachability.isConnectedToNetwork() ? showGenreViewController(with: User.Fox) : showOfflineError()
+    }
+    
+    @IBAction func clearUsersSelections(_ sender: Any) {
+        // clean user's selections from disk
+        repository.cleanDisk()
+        crabCheckedImageView.isHidden = true
+        foxCheckedImageView.isHidden = true
+    }
+    
+    func unwindToHome(segue:UIStoryboardSegue) { }
 }
 

@@ -86,11 +86,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     }
     
     func saveSelectedGenre(with indexPath: IndexPath) {
-        //let genreSelectedCell = genreTableView.cellForRow(at: indexPath) as! GenreTableViewCell
-        //selectedGenres[indexPath.row] = genreSelectedCell.titleLabel.text!
-        
         selectedGenres[indexPath.row] = genres[indexPath.row].id
-
     }
     
     func removeSelectedGenre(with indexPAth: IndexPath) {
@@ -99,7 +95,6 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     
     // Called when the user taps 'Next' button
     @IBAction func saveGenresSelectedInDisk(_ sender: Any) {
-        
         switch user {
             case .Fox :
                 repository.save(dictionary: selectedGenres, for: UserKeys.FoxUserGenres.rawValue)
