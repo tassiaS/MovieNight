@@ -13,21 +13,25 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var foxCheckedImageView: UIImageView!
     @IBOutlet weak var crabCheckedImageView: UIImageView!
     let repository = Factory.createRepository()
+    var crabGenres: [Int: Int]?
+    var foxGenres:  [Int: Int]?
   
     override func viewWillAppear(_ animated: Bool) {
-        let crabGenres = repository.retrieveDictionary(with: UserKeys.CrabUserGenres.rawValue)
-        let foxGenres = repository.retrieveDictionary(with: UserKeys.FoxUserActors.rawValue)
-        
+        crabGenres = repository.retrieveDictionary(with: UserKeys.CrabUserGenres.rawValue)
+        foxGenres = repository.retrieveDictionary(with: UserKeys.FoxUserGenres.rawValue)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         crabCheckedImageView.isHidden = crabGenres == nil
         foxCheckedImageView.isHidden = foxGenres == nil
     }
     
     @IBAction func selectCrabPreferences(_ sender: Any) {
-        checkInternetConnection()
+        checkInternetConnection(user: User.Crab)
     }
     
     @IBAction func selectFoxPreferences(_ sender: Any) {
-        checkInternetConnection()
+        checkInternetConnection(user: User.Fox)
     }
     
     func showGenreViewController(with user: User) {
@@ -36,14 +40,18 @@ class HomeViewController: UIViewController {
         self.present(genreVC, animated: true, completion: nil)
     }
     
-    func showOfflineError() {
-        let alert = UIAlertController(title: "You're offline", message: "Please connect to the internet and try again", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+    func showOfflineError(alertTitle: String, message: String, actionTitle: String) {
+        let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: actionTitle, style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
-    func checkInternetConnection() {
-        Reachability.isConnectedToNetwork() ? showGenreViewController(with: User.Fox) : showOfflineError()
+    func checkInternetConnection(user: User) {
+        if Reachability.isConnectedToNetwork() {
+            showGenreViewController(with: user)
+        } else {
+         showOfflineError(alertTitle: "You're offline", message: "Please connect to the internet and try again", actionTitle: "Ok")
+        }
     }
     
     @IBAction func clearUsersSelections(_ sender: Any) {
@@ -51,6 +59,17 @@ class HomeViewController: UIViewController {
         repository.cleanDisk()
         crabCheckedImageView.isHidden = true
         foxCheckedImageView.isHidden = true
+    }
+    
+    // Segue that leads to view the result should just be executed if both users entered their preferences
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        let shouldPerformSegue = crabGenres != nil && foxGenres != nil
+        
+        if !shouldPerformSegue{
+            showOfflineError(alertTitle: "Hey =)", message: "You should first enter your preferences before checking the result", actionTitle: "Ok")
+        }
+       
+        return shouldPerformSegue
     }
     
     func unwindToHome(segue:UIStoryboardSegue) { }

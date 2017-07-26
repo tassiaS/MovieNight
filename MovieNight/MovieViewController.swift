@@ -107,9 +107,11 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    @IBAction func goBackToOneButtonTapped(_ sender: Any) {
+    @IBAction func showHomeViewController(_ sender: Any) {
         performSegue(withIdentifier: "unwindSeguetoHomeVC", sender: self)
     }
+    
+    
 }
 
 

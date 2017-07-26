@@ -421,8 +421,8 @@
                                             <color key="titleColor" white="1" alpha="0.60000002379999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="goBackToOneButtonTapped:" destination="wL5-NI-gpE" eventType="touchUpInside" id="7pk-Cv-jG3"/>
                                             <action selector="saveMoviesSelectedInDisk:" destination="wL5-NI-gpE" eventType="touchUpInside" id="cKp-Ue-5fE"/>
+                                            <action selector="showHomeViewController:" destination="wL5-NI-gpE" eventType="touchUpInside" id="sB0-PY-rbv"/>
                                         </connections>
                                     </button>
                                 </subviews>
