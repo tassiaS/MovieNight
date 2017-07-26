@@ -19,9 +19,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         crabGenres = repository.retrieveDictionary(with: UserKeys.CrabUserGenres.rawValue)
         foxGenres = repository.retrieveDictionary(with: UserKeys.FoxUserGenres.rawValue)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        
         crabCheckedImageView.isHidden = crabGenres == nil
         foxCheckedImageView.isHidden = foxGenres == nil
     }
