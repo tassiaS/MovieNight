@@ -25,31 +25,27 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func selectCrabPreferences(_ sender: Any) {
-        checkInternetConnection(user: User.Crab)
+        showGenreViewController(with: User.Crab)
     }
     
     @IBAction func selectFoxPreferences(_ sender: Any) {
-        checkInternetConnection(user: User.Fox)
+        showGenreViewController(with: User.Fox)
     }
     
     func showGenreViewController(with user: User) {
-        let genreVC = self.storyboard?.instantiateViewController(withIdentifier: "genreVC") as! GenreViewController
-        genreVC.user = user
-        self.present(genreVC, animated: true, completion: nil)
+        if Reachability.isConnectedToNetwork() {
+            let genreVC = self.storyboard?.instantiateViewController(withIdentifier: "genreVC") as! GenreViewController
+            genreVC.user = user
+            self.present(genreVC, animated: true, completion: nil)
+        } else {
+            showOfflineError(alertTitle: "You're offline", message: "Please connect to the internet and try again", actionTitle: "Ok")
+        }
     }
     
     func showOfflineError(alertTitle: String, message: String, actionTitle: String) {
         let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    func checkInternetConnection(user: User) {
-        if Reachability.isConnectedToNetwork() {
-            showGenreViewController(with: user)
-        } else {
-         showOfflineError(alertTitle: "You're offline", message: "Please connect to the internet and try again", actionTitle: "Ok")
-        }
     }
     
     @IBAction func clearUsersSelections(_ sender: Any) {
