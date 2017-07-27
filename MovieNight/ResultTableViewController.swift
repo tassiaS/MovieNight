@@ -124,10 +124,13 @@ class ResultTableViewController: UITableViewController {
         
         if indexPath.row % 2 == 1 {
             cell.blueView.alpha = 0.75
+        } else {
+            cell.blueView.alpha = 1.0
         }
         
         cell.titleLabel.text = recommendedMovies[indexPath.row].title
         let releaseDate = recommendedMovies[indexPath.row].releaseDate?.characters.prefix(4)
+        
         if let releaseDate = releaseDate {
             cell.yearLabel.text = String(releaseDate)
         }
