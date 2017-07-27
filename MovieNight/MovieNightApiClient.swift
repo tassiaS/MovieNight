@@ -98,7 +98,12 @@ final class MovieNightApiClient: ApiClient, HttpClient {
                 return nil
             }
             return genres.flatMap {
-                return Genre(JSON: $0)
+                do {
+                    return try Genre(JSON: $0)
+                } catch (let error){
+                    print(error)
+                }
+                return nil
             }
             
         }, completion: completion)
@@ -113,7 +118,12 @@ final class MovieNightApiClient: ApiClient, HttpClient {
                 return nil
             }
             return popularActors.flatMap {
-                return Actor(JSON: $0)
+                do {
+                    return try Actor(JSON: $0)
+                } catch (let error){
+                    print(error)
+                }
+                return nil
             }
         }, completion: completion)
     }
@@ -126,8 +136,20 @@ final class MovieNightApiClient: ApiClient, HttpClient {
             guard let popularMovies = json["results"] as? [[String:AnyObject]] else {
                 return nil
             }
-            return popularMovies.flatMap {
-                return Movie(JSON: $0)
+            let movies = popularMovies.flatMap { (movie) -> Movie? in
+                do {
+                    return try Movie(JSON: movie)
+                } catch (let error){
+                    print(error)
+                }
+                return nil
+            }
+            
+            
+            if movies.isEmpty {
+                return nil
+            } else {
+                return movies
             }
         }, completion: completion)
     }
@@ -141,8 +163,20 @@ final class MovieNightApiClient: ApiClient, HttpClient {
             guard let popularMovies = json["results"] as? [[String:AnyObject]] else {
                 return nil
             }
-            return popularMovies.flatMap {
-                return Movie(JSON: $0)
+            
+            let movies =  popularMovies.flatMap { (movie) -> Movie? in
+                do {
+                    return try Movie(JSON: movie)
+                } catch (let error){
+                    print(error)
+                }
+                return nil
+            }
+            
+            if movies.isEmpty {
+                return nil
+            } else {
+                return movies
             }
         }, completion: completion)
     }
@@ -155,8 +189,20 @@ final class MovieNightApiClient: ApiClient, HttpClient {
             guard let movieCredits = json["cast"] as? [[String:AnyObject]], let movieId = json["id"] as? Int else {
                 return nil
             }
-            return movieCredits.flatMap {
-                return Credit(JSON: $0, movieId: movieId)
+            
+            let credits = movieCredits.flatMap { (credit) -> Credit? in
+                do {
+                    return try Credit(JSON: credit, movieId: movieId)
+                } catch (let error){
+                    print(error)
+                }
+                return nil
+            }
+            
+            if credits.isEmpty {
+                return nil
+            } else {
+                return credits
             }
         }, completion: completion)
     }

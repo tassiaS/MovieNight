@@ -10,9 +10,12 @@ import Foundation
 
 //Model
 
+enum ErrorApi : Error {
+    case jsonInvalidKeyOrElement(String)
+}
 
 protocol JSONDecodable {
-    init?(JSON: [String: AnyObject])
+    init?(JSON: [String: AnyObject]) throws
 }
 
 enum UserKeys: String {
@@ -40,12 +43,12 @@ struct Actor: JSONDecodable, Equatable {
     }
 
     
-    init?(JSON: [String: AnyObject]) {
+    init?(JSON: [String: AnyObject]) throws {
         guard let name = JSON["name"] as? String else {
-            return nil
+            throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -name-")
         }
         guard let id = JSON["id"] as? Int else {
-            return nil
+            throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -id-")
         }
         self.name = name
         self.id = id
@@ -60,12 +63,11 @@ struct Credit {
     var movieId: Int
     var actor: Actor
     
-    init?(JSON: [String: AnyObject], movieId: Int) {
+    init?(JSON: [String: AnyObject], movieId: Int) throws {
         guard let name = JSON["name"] as? String else {
-            return nil
-        }
+            throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -name-")        }
         guard let id = JSON["id"] as? Int else {
-            return nil
+            throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -id-")
         }
         
         self.actor = Actor(name: name, id: id)
@@ -87,19 +89,23 @@ struct Movie : JSONDecodable, Hashable, Equatable {
         self.genreIds = genreIds
     }
     
-    init?(JSON: [String: AnyObject]) {
+    init?(JSON: [String: AnyObject]) throws {
         guard let name = JSON["title"] as? String else {
-            return nil
+            throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -name-")
         }
         guard let id = JSON["id"] as? Int else {
-            return nil
+           throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -id-")
         }
         guard let genreIds = JSON["genre_ids"] as? [Int] else {
-            return nil
+            throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -genresIds-")
+        }
+        guard let releaseDate = JSON["release_date"] as? String else {
+            throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -release_date-")
         }
         self.title = name
         self.id = id
         self.genreIds = genreIds
+        self.releaseDate = releaseDate
     }
     
     static func == (lhs: Movie, rhs: Movie) -> Bool {
@@ -117,12 +123,12 @@ struct Genre: JSONDecodable, Equatable {
     }
 
     
-    init?(JSON: [String: AnyObject]) {
+    init?(JSON: [String: AnyObject]) throws {
         guard let name = JSON["name"] as? String else {
-            return nil
+            throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -name-")
         }
         guard let id = JSON["id"] as? Int else {
-            return nil
+            throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -id-")
         }
         self.name = name
         self.id = id

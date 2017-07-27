@@ -13,16 +13,57 @@ class ResultTableViewController: UITableViewController {
     var matcher = MovieNightMatcher()
     var recommendedMovies = [Movie]()
     var repository = Factory.createRepository()
-
+    let loadingView = UIView()
+    let loadingLabel = UILabel()
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var topBarView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setLoadingScreen()
         loadData()
+    }
+    
+    // Set the activity indicator into the main view
+    private func setLoadingScreen() {
+        
+        // Sets the view which contains the loading text and the spinner
+        let width: CGFloat = 120
+        let height: CGFloat = 30
+        let x = (self.tableView.frame.width / 2) - (width / 2)
+        let y = (self.tableView.frame.height / 2) - (height / 2) - (topBarView.frame.height)
+        let origin = CGPoint(x: x, y: y)
+        let size = CGSize(width: width, height: height)
+        loadingView.frame = CGRect(origin: origin, size: size)
+        
+        // Sets loading text
+        self.loadingLabel.textColor = UIColor.gray
+        self.loadingLabel.textAlignment = NSTextAlignment.center
+        self.loadingLabel.text = "Loading..."
+        let originLabel = CGPoint(x: 0, y: 0)
+        let sizeLabel = CGSize(width: 140, height: 30)
+        self.loadingLabel.frame = CGRect(origin: originLabel, size:  sizeLabel)
+        
+        // Sets spinner
+        self.activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        let activityIndicatorOrigin = CGPoint(x: 0, y: 0)
+        let activityIndicatorSize = CGSize(width: 30, height: 30)
+        self.activityIndicatorView.frame = CGRect(origin: activityIndicatorOrigin, size: activityIndicatorSize)
+        self.activityIndicatorView.startAnimating()
+        
+        // Adds text and spinner to the view
+        loadingView.addSubview(self.activityIndicatorView)
+        loadingView.addSubview(self.loadingLabel)
+        
+        self.tableView.addSubview(loadingView)
+        
     }
     
     func loadData() {
         let data = getDatafromDisk()
         
         matcher.matchUserSelections(with: data.foxGenres, and: data.crabGenres, and: data.foxActors, and: data.crabActors, and: data.crabMovies, and: data.foxMovies) { movies in
+            self.removeLoadingScreen()
             self.recommendedMovies = movies
             self.tableView.reloadData()
         }
@@ -80,7 +121,19 @@ class ResultTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultIdCell", for: indexPath) as! ResultTableViewCell
+        
+        if indexPath.row % 2 == 1 {
+            cell.blueView.alpha = 0.75
+        } else {
+            cell.blueView.alpha = 1.0
+        }
+        
         cell.titleLabel.text = recommendedMovies[indexPath.row].title
+        let releaseDate = recommendedMovies[indexPath.row].releaseDate?.characters.prefix(4)
+        
+        if let releaseDate = releaseDate {
+            cell.yearLabel.text = String(releaseDate)
+        }
         return cell
     }
     
@@ -88,6 +141,14 @@ class ResultTableViewController: UITableViewController {
         // clean user's selections from disk
         repository.cleanDisk()
         dismiss(animated: true, completion: nil)
+    }
+    
+    // Remove the activity indicator from the main view
+    private func removeLoadingScreen() {
+        // Hides spinner
+        self.activityIndicatorView.stopAnimating()
+        self.loadingLabel.isHidden = true
+        self.activityIndicatorView.isHidden = true
     }
     
 }

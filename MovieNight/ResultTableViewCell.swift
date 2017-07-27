@@ -12,7 +12,7 @@ class ResultTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
-    
+    @IBOutlet weak var blueView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
