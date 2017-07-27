@@ -26,7 +26,6 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         movieTableView.delegate = self

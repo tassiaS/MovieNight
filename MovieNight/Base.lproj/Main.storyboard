@@ -168,7 +168,7 @@
                                         <rect key="frame" x="363" y="18" width="36" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Next">
-                                            <color key="titleColor" white="1" alpha="0.60000002379999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="saveGenresSelectedInDisk:" destination="FFh-FT-7hR" eventType="touchUpInside" id="rOd-fr-4tw"/>
@@ -294,7 +294,7 @@
                                         <rect key="frame" x="363" y="18" width="36" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Next">
-                                            <color key="titleColor" white="1" alpha="0.60000002379999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="saveActorsSelectedInDisk:" destination="Jc4-o7-ymo" eventType="touchUpInside" id="PkH-Cq-94x"/>
@@ -421,7 +421,7 @@
                                         <rect key="frame" x="358" y="18" width="41" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Done">
-                                            <color key="titleColor" white="1" alpha="0.60000002379999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="saveMoviesSelectedInDisk:" destination="wL5-NI-gpE" eventType="touchUpInside" id="cKp-Ue-5fE"/>
@@ -537,22 +537,16 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="79"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="SBw-zf-apd">
+                                    <rect key="frame" x="197" y="29" width="20" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrN-D6-65S">
                                     <rect key="frame" x="171" y="38" width="72" height="24"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8d-xc-CFI">
-                                    <rect key="frame" x="358" y="18" width="41" height="33"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <state key="normal" title="Done">
-                                        <color key="titleColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="didClickDone:" destination="zka-ST-2af" eventType="touchUpInside" id="y0i-aM-aH0"/>
-                                    </connections>
-                                </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DDc-QV-AVY" userLabel="topBarResultView">
                                     <rect key="frame" x="0.0" y="1" width="414" height="20"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -561,15 +555,25 @@
                                         <constraint firstAttribute="width" constant="414" id="nEc-Ht-aHp"/>
                                     </constraints>
                                 </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8d-xc-CFI">
+                                    <rect key="frame" x="359" y="34" width="41" height="33"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <state key="normal" title="Done">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didClickDone:" destination="zka-ST-2af" eventType="touchUpInside" id="y0i-aM-aH0"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.82723270940000004" green="0.60946747059999995" blue="0.5140441509" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="nrN-D6-65S" secondAttribute="bottom" constant="17" id="3or-gj-nLN"/>
-                                <constraint firstAttribute="trailing" secondItem="b8d-xc-CFI" secondAttribute="trailing" constant="15" id="B4b-od-tAB"/>
+                                <constraint firstAttribute="trailing" secondItem="b8d-xc-CFI" secondAttribute="trailing" constant="14" id="B4b-od-tAB"/>
                                 <constraint firstItem="nrN-D6-65S" firstAttribute="top" secondItem="DDc-QV-AVY" secondAttribute="bottom" constant="17" id="IOZ-j0-WLh"/>
                                 <constraint firstAttribute="trailing" secondItem="DDc-QV-AVY" secondAttribute="trailing" id="y0E-E9-vZp"/>
                                 <constraint firstItem="nrN-D6-65S" firstAttribute="centerX" secondItem="aKq-zG-Dml" secondAttribute="centerX" id="yYm-Kc-Xnj"/>
-                                <constraint firstItem="b8d-xc-CFI" firstAttribute="top" secondItem="aKq-zG-Dml" secondAttribute="top" constant="18" id="ytZ-lf-Ldb"/>
+                                <constraint firstItem="b8d-xc-CFI" firstAttribute="top" secondItem="aKq-zG-Dml" secondAttribute="top" constant="34" id="ytZ-lf-Ldb"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -621,6 +625,10 @@
                             <outlet property="delegate" destination="zka-ST-2af" id="bab-Ju-hu3"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="SBw-zf-apd" id="kNr-Ve-ecy"/>
+                        <outlet property="topBarView" destination="DDc-QV-AVY" id="ppK-u8-BVu"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4tT-TN-YBh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
