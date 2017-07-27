@@ -17,7 +17,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     var selectedActors = [Int:Int]()
     var user = User.Fox
     var actorsSelectedCount = 0
-    let actorsLimit = 3
+    let actorsLimit = 2
     @IBOutlet weak var numberOfSelectedActorsLabel: UILabel!
     var hasNextPage: Bool = true {
         didSet {
@@ -87,7 +87,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             //Show an alert in case the user have selected the limit amount of actors
             guard actorsSelectedCount < actorsLimit  else {
-                let alert = Alert.create(alertTitle: "You've selected 3 actors", message: "Please, go to next page", actionTitle: "Ok")
+                let alert = Alert.create(alertTitle: "You've selected \(actorsLimit) actors", message: "Please, go to next page", actionTitle: "Ok")
                 present(alert, animated: true, completion: nil)
                 return
             }
@@ -111,7 +111,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func updateNumberOfSelectedActorsLabel() {
-        numberOfSelectedActorsLabel.text = "\(actorsSelectedCount) of 3 selected"
+        numberOfSelectedActorsLabel.text = "\(actorsSelectedCount) of \(actorsLimit) selected"
     }
     
     // Called when the user taps 'Next' button
@@ -129,7 +129,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
         let shouldPerformSegue = actorsSelectedCount == actorsLimit
         
         if !shouldPerformSegue{
-            let alert = Alert.create(alertTitle: "Hey =)", message: "Please, select 3 actors before going to next page", actionTitle: "Ok")
+            let alert = Alert.create(alertTitle: "Hey =)", message: "Please, select \(actorsLimit) actors before going to next page", actionTitle: "Ok")
             present(alert, animated: true, completion: nil)
         }
         

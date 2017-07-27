@@ -23,6 +23,11 @@ class HomeViewController: UIViewController {
     }
   
     override func viewWillAppear(_ animated: Bool) {
+        updateUi()
+    }
+    
+    //Enable or Desable resultButton - Hide or show checkImageView
+    func updateUi(){
         crabGenres = repository.retrieveDictionary(with: UserKeys.CrabUserGenres.rawValue)
         foxGenres = repository.retrieveDictionary(with: UserKeys.FoxUserGenres.rawValue)
         
@@ -30,7 +35,9 @@ class HomeViewController: UIViewController {
         foxCheckedImageView.isHidden = foxGenres == nil
         
         resultButton.isEnabled = crabGenres != nil && foxGenres != nil
+        resultButton.alpha = resultButton.isEnabled ?  1.0 : 0.3
     }
+    
     @IBAction func selectCrabPreferences(_ sender: Any) {
         showGenreViewController(with: User.Crab)
     }
@@ -50,16 +57,14 @@ class HomeViewController: UIViewController {
     }
     
     func showOfflineError(alertTitle: String, message: String, actionTitle: String) {
-        let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: actionTitle, style: UIAlertActionStyle.default, handler: nil))
+        let alert = Alert.create(alertTitle: alertTitle, message: message, actionTitle: "Ok")
         self.present(alert, animated: true, completion: nil)
     }
 
     @IBAction func clearUsersSelections(_ sender: Any) {
         // clean user's selections from disk
         repository.cleanDisk()
-        crabCheckedImageView.isHidden = true
-        foxCheckedImageView.isHidden = true
+        updateUi()
     }
     
     // Segue that leads to view the result should just be executed if both users entered their preferences

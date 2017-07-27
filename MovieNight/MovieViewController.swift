@@ -88,7 +88,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             //Show an alert in case the user have selected the limit amount of movies
             guard moviesSelectedCount < moviesLimit  else {
-                let alert = Alert.create(alertTitle: "You've selected 3 movies", message: "Please, go to next page", actionTitle: "Ok")
+                let alert = Alert.create(alertTitle: "You've selected \(moviesLimit) movies", message: "Please, go to next page", actionTitle: "Ok")
                 present(alert, animated: true, completion: nil)
                 return
             }
@@ -112,7 +112,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func updateNumberOfSelectedActorsLabel() {
-        numberOfSelectedMoviesLabel.text = "\(moviesSelectedCount) of 2 selected"
+        numberOfSelectedMoviesLabel.text = "\(moviesSelectedCount) of \(moviesLimit) selected"
     }
     
     // Called when the user taps the 'Done' button
@@ -131,7 +131,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if shouldPerformSegue {
             performSegue(withIdentifier: "unwindSeguetoHomeVC", sender: self)
         } else {
-            let alert = Alert.create(alertTitle: "Hey =)", message: "Please, select 3 movies before going to next page", actionTitle: "Ok")
+            let alert = Alert.create(alertTitle: "Hey =)", message: "Please, select \(moviesLimit) movies before going to next page", actionTitle: "Ok")
             present(alert, animated: true, completion: nil)
         }
     }

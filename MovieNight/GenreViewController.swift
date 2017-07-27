@@ -17,7 +17,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     var selectedGenres = [Int:Int]()
     var user = User.Fox
     var genresSelectedCount = 0
-    let genresLimit = 3
+    let genresLimit = 2
     @IBOutlet weak var numberOfSelectedGenresLabel: UILabel!
     
     var hasNextPage: Bool = true {
@@ -87,7 +87,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
             
             //Show an alert in case the user have selected the limit amount of genres
             guard genresSelectedCount < genresLimit  else {
-                let alert = Alert.create(alertTitle: "You've selected 3 genres", message: "Please, go to next page", actionTitle: "Ok")
+                let alert = Alert.create(alertTitle: "You've selected \(genresLimit) genres", message: "Please, go to next page", actionTitle: "Ok")
                 present(alert, animated: true, completion: nil)
                 return
             }
@@ -111,7 +111,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     }
     
     func updateNumberOfSelectedGenresLabel() {
-        numberOfSelectedGenresLabel.text = "\(genresSelectedCount) of 3 selected"
+        numberOfSelectedGenresLabel.text = "\(genresSelectedCount) of \(genresLimit) selected"
     }
     
     // Called when the user taps 'Next' button
@@ -129,7 +129,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
         let shouldPerformSegue = genresSelectedCount == genresLimit
 
         if !shouldPerformSegue{
-            let alert = Alert.create(alertTitle: "Hey =)", message: "Please, select 3 genres before going to next page", actionTitle: "Ok")
+            let alert = Alert.create(alertTitle: "Hey =)", message: "Please, select \(genresLimit) genres before going to next page", actionTitle: "Ok")
             present(alert, animated: true, completion: nil)
         }
         
