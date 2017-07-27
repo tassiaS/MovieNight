@@ -16,6 +16,9 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     var repository = Factory.createRepository()
     var selectedActors = [Int:Int]()
     var user = User.Fox
+    var actorsSelectedCount = 0
+    let actorsLimit = 2
+    @IBOutlet weak var numberOfSelectedActorsLabel: UILabel!
     var hasNextPage: Bool = true {
         didSet {
             self.page += 1
@@ -72,6 +75,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     @IBAction func didSelectActor(_ sender: Any) {
+        
         let loveButton = sender as! UIButton
         let indexPath = IndexPath(row: loveButton.tag, section: 0)
         
@@ -80,6 +84,14 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
             loveButton.isSelected = false
             removeSelectedActor(with: indexPath)
         } else {
+            
+            //Show an alert in case the user have selected the limit amount of actors
+            guard actorsSelectedCount < actorsLimit  else {
+                let alert = Alert.create(alertTitle: "You've selected \(actorsLimit) actors", message: "Please, go to next page", actionTitle: "Ok")
+                present(alert, animated: true, completion: nil)
+                return
+            }
+
             loveButton.setImage(UIImage(named: "loveSelected"), for: .normal)
             loveButton.isSelected = true
              saveSelectedActor(with: indexPath)
@@ -87,13 +99,19 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func saveSelectedActor(with indexPath: IndexPath) {
-        //let actorSelectedCell = actorTableView.cellForRow(at: indexPath) as! ActorTableViewCell
-        //selectedActors[indexPath.row] = actorSelectedCell.nameLabel.text!
+        actorsSelectedCount += 1
+        updateNumberOfSelectedActorsLabel()
         selectedActors[indexPath.row] = actors[indexPath.row].id
     }
     
     func removeSelectedActor(with indexPAth: IndexPath) {
+        actorsSelectedCount -= 1
+        updateNumberOfSelectedActorsLabel()
         selectedActors.removeValue(forKey: indexPAth.row)
+    }
+    
+    func updateNumberOfSelectedActorsLabel() {
+        numberOfSelectedActorsLabel.text = "\(actorsSelectedCount) of \(actorsLimit) selected"
     }
     
     // Called when the user taps 'Next' button
@@ -104,6 +122,18 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
         case .Crab:
             repository.save(dictionary: selectedActors, for: UserKeys.CrabUserActors.rawValue)
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        let shouldPerformSegue = actorsSelectedCount == actorsLimit
+        
+        if !shouldPerformSegue{
+            let alert = Alert.create(alertTitle: "Hey =)", message: "Please, select \(actorsLimit) actors before going to next page", actionTitle: "Ok")
+            present(alert, animated: true, completion: nil)
+        }
+        
+        return shouldPerformSegue
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

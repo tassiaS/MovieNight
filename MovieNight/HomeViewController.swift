@@ -12,16 +12,29 @@ class HomeViewController: UIViewController {
    
     @IBOutlet weak var foxCheckedImageView: UIImageView!
     @IBOutlet weak var crabCheckedImageView: UIImageView!
+    @IBOutlet weak var resultButton: UIButton!
     let repository = Factory.createRepository()
+    
     var crabGenres: [Int: Int]?
     var foxGenres:  [Int: Int]?
+    
+    override func viewDidLoad() {
+        repository.cleanDisk()
+    }
   
     override func viewWillAppear(_ animated: Bool) {
+        updateUi()
+    }
+    
+    func updateUi(){
         crabGenres = repository.retrieveDictionary(with: UserKeys.CrabUserGenres.rawValue)
         foxGenres = repository.retrieveDictionary(with: UserKeys.FoxUserGenres.rawValue)
         
         crabCheckedImageView.isHidden = crabGenres == nil
         foxCheckedImageView.isHidden = foxGenres == nil
+        
+        resultButton.isEnabled = crabGenres != nil && foxGenres != nil
+        resultButton.alpha = resultButton.isEnabled ?  1.0 : 0.3
     }
     
     @IBAction func selectCrabPreferences(_ sender: Any) {
@@ -43,16 +56,14 @@ class HomeViewController: UIViewController {
     }
     
     func showOfflineError(alertTitle: String, message: String, actionTitle: String) {
-        let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: actionTitle, style: UIAlertActionStyle.default, handler: nil))
+        let alert = Alert.create(alertTitle: alertTitle, message: message, actionTitle: "Ok")
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     @IBAction func clearUsersSelections(_ sender: Any) {
         // clean user's selections from disk
         repository.cleanDisk()
-        crabCheckedImageView.isHidden = true
-        foxCheckedImageView.isHidden = true
+        updateUi()
     }
     
     // Segue that leads to view the result should just be executed if both users entered their preferences
@@ -60,7 +71,8 @@ class HomeViewController: UIViewController {
         let shouldPerformSegue = crabGenres != nil && foxGenres != nil
         
         if !shouldPerformSegue{
-            showOfflineError(alertTitle: "Hey =)", message: "You should first enter your preferences before checking the result", actionTitle: "Ok")
+            let alert = Alert.create(alertTitle: "Hey =)", message: "You should first enter your preferences before checking the result", actionTitle: "Ok")
+            present(alert, animated: true, completion: nil)
         }
        
         return shouldPerformSegue

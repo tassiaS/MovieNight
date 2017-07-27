@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieNight/HomeViewController.swift"
-            timestampString = "522753539.958542"
+            timestampString = "522848147.055031"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "clearUsersSelections(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,29 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MovieNight/GenreViewController.swift"
-            timestampString = "522751787.618825"
+            filePath = "MovieNight/HomeViewController.swift"
+            timestampString = "522848151.059329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "saveGenresSelectedInDisk(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MovieNight/GenreViewController.swift"
-            timestampString = "522751855.647795"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "saveGenresSelectedInDisk(_:)"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "updateHomeViews()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

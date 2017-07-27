@@ -17,11 +17,15 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var repository = Factory.createRepository()
     var page = 1
     var user = User.Fox
+    var moviesSelectedCount = 0
+    let moviesLimit = 2
+    @IBOutlet weak var numberOfSelectedMoviesLabel: UILabel!
     var hasNextPage: Bool = true {
         didSet {
             self.page += 1
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +85,14 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
             loveButton.isSelected = false
             removeSelectedMovie(with: indexPath)
         } else {
+            
+            //Show an alert in case the user have selected the limit amount of movies
+            guard moviesSelectedCount < moviesLimit  else {
+                let alert = Alert.create(alertTitle: "You've selected \(moviesLimit) movies", message: "Please, go to next page", actionTitle: "Ok")
+                present(alert, animated: true, completion: nil)
+                return
+            }
+            
             loveButton.setImage(UIImage(named: "loveSelected"), for: .normal)
             loveButton.isSelected = true
             saveSelectedMovie(with: indexPath)
@@ -88,13 +100,19 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func saveSelectedMovie(with indexPath: IndexPath) {
-        //let movieSelectedCell = movieTableView.cellForRow(at: indexPath) as! MovieTableViewCell
-        //selectedMovies[movieSelectedCell.id] = movieSelectedCell.titleLabel.text!
+        moviesSelectedCount += 1
+        updateNumberOfSelectedActorsLabel()
         selectedMovies[indexPath.row] = movies[indexPath.row].id
     }
     
     func removeSelectedMovie(with indexPAth: IndexPath) {
+        moviesSelectedCount -= 1
+        updateNumberOfSelectedActorsLabel()
         selectedMovies.removeValue(forKey: indexPAth.row)
+    }
+    
+    func updateNumberOfSelectedActorsLabel() {
+        numberOfSelectedMoviesLabel.text = "\(moviesSelectedCount) of \(moviesLimit) selected"
     }
     
     // Called when the user taps the 'Done' button
@@ -108,10 +126,15 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @IBAction func showHomeViewController(_ sender: Any) {
-        performSegue(withIdentifier: "unwindSeguetoHomeVC", sender: self)
+        let shouldPerformSegue = moviesSelectedCount == moviesLimit
+        
+        if shouldPerformSegue {
+            performSegue(withIdentifier: "unwindSeguetoHomeVC", sender: self)
+        } else {
+            let alert = Alert.create(alertTitle: "Hey =)", message: "Please, select \(moviesLimit) movies before going to next page", actionTitle: "Ok")
+            present(alert, animated: true, completion: nil)
+        }
     }
-    
-    
 }
 
 

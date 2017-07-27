@@ -16,6 +16,10 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     var repository = Factory.createRepository()
     var selectedGenres = [Int:Int]()
     var user = User.Fox
+    var genresSelectedCount = 0
+    let genresLimit = 2
+    @IBOutlet weak var numberOfSelectedGenresLabel: UILabel!
+    
     var hasNextPage: Bool = true {
         didSet {
             self.page += 1
@@ -71,6 +75,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     }
     
     @IBAction func didSelectGenre(_ sender: Any) {
+        
         let loveButton = sender as! UIButton
         let indexPath = IndexPath(row: loveButton.tag, section: 0)
         
@@ -79,6 +84,14 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
             loveButton.isSelected = false
             removeSelectedGenre(with: indexPath)
         } else {
+            
+            //Show an alert in case the user have selected the limit amount of genres
+            guard genresSelectedCount < genresLimit  else {
+                let alert = Alert.create(alertTitle: "You've selected \(genresLimit) genres", message: "Please, go to next page", actionTitle: "Ok")
+                present(alert, animated: true, completion: nil)
+                return
+            }
+            
             loveButton.setImage(UIImage(named: "loveSelected"), for: .normal)
             loveButton.isSelected = true
             saveSelectedGenre(with: indexPath)
@@ -86,11 +99,19 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     }
     
     func saveSelectedGenre(with indexPath: IndexPath) {
+        genresSelectedCount += 1
+        updateNumberOfSelectedGenresLabel()
         selectedGenres[indexPath.row] = genres[indexPath.row].id
     }
     
     func removeSelectedGenre(with indexPAth: IndexPath) {
+        genresSelectedCount -= 1
+        updateNumberOfSelectedGenresLabel()
         selectedGenres.removeValue(forKey: indexPAth.row)
+    }
+    
+    func updateNumberOfSelectedGenresLabel() {
+        numberOfSelectedGenresLabel.text = "\(genresSelectedCount) of \(genresLimit) selected"
     }
     
     // Called when the user taps 'Next' button
@@ -101,6 +122,18 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
             case .Crab:
                 repository.save(dictionary: selectedGenres, for: UserKeys.CrabUserGenres.rawValue)
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        let shouldPerformSegue = genresSelectedCount == genresLimit
+
+        if !shouldPerformSegue{
+            let alert = Alert.create(alertTitle: "Hey =)", message: "Please, select \(genresLimit) genres before going to next page", actionTitle: "Ok")
+            present(alert, animated: true, completion: nil)
+        }
+        
+        return shouldPerformSegue
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
