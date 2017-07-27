@@ -593,7 +593,7 @@
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="he1-M2-MpN">
                                             <rect key="frame" x="0.0" y="-9" width="98" height="102"/>
-                                            <color key="backgroundColor" red="0.37574601708029842" green="0.64090646223665659" blue="0.93609216370558379" alpha="0.47982662671232879" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.30369740596918732" green="0.64090646223665659" blue="0.93609216370558379" alpha="0.47982662671232879" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="102" id="88k-wE-Z8u"/>
                                                 <constraint firstAttribute="width" constant="98" id="Jde-me-h5h"/>
@@ -617,6 +617,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="blueView" destination="he1-M2-MpN" id="sjz-oP-Q4o"/>
                                     <outlet property="titleLabel" destination="xH2-NM-scm" id="dDt-Ub-FMf"/>
                                     <outlet property="yearLabel" destination="Ytv-sd-Uaz" id="Hmo-br-T7B"/>
                                 </connections>

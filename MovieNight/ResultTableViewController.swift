@@ -121,6 +121,11 @@ class ResultTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultIdCell", for: indexPath) as! ResultTableViewCell
+        
+        if indexPath.row % 2 == 1 {
+            cell.blueView.alpha = 0.75
+        }
+        
         cell.titleLabel.text = recommendedMovies[indexPath.row].title
         let releaseDate = recommendedMovies[indexPath.row].releaseDate?.characters.prefix(4)
         if let releaseDate = releaseDate {

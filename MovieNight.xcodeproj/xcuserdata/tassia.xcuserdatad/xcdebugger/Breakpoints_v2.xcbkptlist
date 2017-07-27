@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieNight/ResultTableViewController.swift"
-            timestampString = "522882246.767135"
+            timestampString = "522883020.682134"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "removeLoadingScreen()"
             landmarkType = "7">
          </BreakpointContent>
