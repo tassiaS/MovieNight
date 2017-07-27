@@ -99,9 +99,13 @@ struct Movie : JSONDecodable, Hashable, Equatable {
         guard let genreIds = JSON["genre_ids"] as? [Int] else {
             throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -genresIds-")
         }
+        guard let releaseDate = JSON["release_date"] as? String else {
+            throw ErrorApi.jsonInvalidKeyOrElement("error - key or element invalid -release_date-")
+        }
         self.title = name
         self.id = id
         self.genreIds = genreIds
+        self.releaseDate = releaseDate
     }
     
     static func == (lhs: Movie, rhs: Movie) -> Bool {

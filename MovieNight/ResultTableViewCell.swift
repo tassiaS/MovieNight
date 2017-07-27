@@ -12,7 +12,6 @@ class ResultTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
-    
 
     override func awakeFromNib() {
         super.awakeFromNib()
