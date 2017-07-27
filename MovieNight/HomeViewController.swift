@@ -26,7 +26,6 @@ class HomeViewController: UIViewController {
         updateUi()
     }
     
-    //Enable or Desable resultButton - Hide or show checkImageView
     func updateUi(){
         crabGenres = repository.retrieveDictionary(with: UserKeys.CrabUserGenres.rawValue)
         foxGenres = repository.retrieveDictionary(with: UserKeys.FoxUserGenres.rawValue)
