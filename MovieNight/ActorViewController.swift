@@ -76,14 +76,6 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBAction func didSelectActor(_ sender: Any) {
         
-        //Show an alert in case the user have selected the limit amount of actors
-        guard actorsSelectedCount < actorsLimit  else {
-            let alert = Alert.create(alertTitle: "You've selected 3 actors", message: "Please, go to next page", actionTitle: "Ok")
-            present(alert, animated: true, completion: nil)
-            return
-        }
-
-        
         let loveButton = sender as! UIButton
         let indexPath = IndexPath(row: loveButton.tag, section: 0)
         
@@ -92,6 +84,14 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
             loveButton.isSelected = false
             removeSelectedActor(with: indexPath)
         } else {
+            
+            //Show an alert in case the user have selected the limit amount of actors
+            guard actorsSelectedCount < actorsLimit  else {
+                let alert = Alert.create(alertTitle: "You've selected 3 actors", message: "Please, go to next page", actionTitle: "Ok")
+                present(alert, animated: true, completion: nil)
+                return
+            }
+
             loveButton.setImage(UIImage(named: "loveSelected"), for: .normal)
             loveButton.isSelected = true
              saveSelectedActor(with: indexPath)

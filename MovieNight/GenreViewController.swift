@@ -76,13 +76,6 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     
     @IBAction func didSelectGenre(_ sender: Any) {
         
-        //Show an alert in case the user have selected the limit amount of genres
-        guard genresSelectedCount < genresLimit  else {
-           let alert = Alert.create(alertTitle: "You've selected 3 genres", message: "Please, go to next page", actionTitle: "Ok")
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        
         let loveButton = sender as! UIButton
         let indexPath = IndexPath(row: loveButton.tag, section: 0)
         
@@ -91,6 +84,14 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
             loveButton.isSelected = false
             removeSelectedGenre(with: indexPath)
         } else {
+            
+            //Show an alert in case the user have selected the limit amount of genres
+            guard genresSelectedCount < genresLimit  else {
+                let alert = Alert.create(alertTitle: "You've selected 3 genres", message: "Please, go to next page", actionTitle: "Ok")
+                present(alert, animated: true, completion: nil)
+                return
+            }
+            
             loveButton.setImage(UIImage(named: "loveSelected"), for: .normal)
             loveButton.isSelected = true
             saveSelectedGenre(with: indexPath)

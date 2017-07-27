@@ -34,7 +34,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WL6-Ol-5e3">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WL6-Ol-5e3">
                                 <rect key="frame" x="20" y="678" width="374" height="50"/>
                                 <color key="backgroundColor" red="0.82723270939086291" green="0.47186470731348545" blue="0.27318975829543468" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -136,6 +136,7 @@
                     <connections>
                         <outlet property="crabCheckedImageView" destination="W7n-Qk-gfs" id="TyG-F8-nrs"/>
                         <outlet property="foxCheckedImageView" destination="aDW-XR-Qef" id="ZhR-EZ-4B5"/>
+                        <outlet property="resultButton" destination="WL6-Ol-5e3" id="oLZ-Mo-fig"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

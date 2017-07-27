@@ -12,9 +12,15 @@ class HomeViewController: UIViewController {
    
     @IBOutlet weak var foxCheckedImageView: UIImageView!
     @IBOutlet weak var crabCheckedImageView: UIImageView!
+    @IBOutlet weak var resultButton: UIButton!
     let repository = Factory.createRepository()
+    
     var crabGenres: [Int: Int]?
     var foxGenres:  [Int: Int]?
+    
+    override func viewDidLoad() {
+        repository.cleanDisk()
+    }
   
     override func viewWillAppear(_ animated: Bool) {
         crabGenres = repository.retrieveDictionary(with: UserKeys.CrabUserGenres.rawValue)
@@ -22,8 +28,9 @@ class HomeViewController: UIViewController {
         
         crabCheckedImageView.isHidden = crabGenres == nil
         foxCheckedImageView.isHidden = foxGenres == nil
+        
+        resultButton.isEnabled = crabGenres != nil && foxGenres != nil
     }
-    
     @IBAction func selectCrabPreferences(_ sender: Any) {
         showGenreViewController(with: User.Crab)
     }
@@ -38,11 +45,16 @@ class HomeViewController: UIViewController {
             genreVC.user = user
             self.present(genreVC, animated: true, completion: nil)
         } else {
-            let alert = Alert.create(alertTitle: "You're offline", message: "Please connect to the internet and try again", actionTitle: "Ok")
-            present(alert, animated: true, completion: nil)
+            showOfflineError(alertTitle: "You're offline", message: "Please connect to the internet and try again", actionTitle: "Ok")
         }
     }
     
+    func showOfflineError(alertTitle: String, message: String, actionTitle: String) {
+        let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: actionTitle, style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     @IBAction func clearUsersSelections(_ sender: Any) {
         // clean user's selections from disk
         repository.cleanDisk()
