@@ -11,6 +11,7 @@ import UIKit
 class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var genreTableView: UITableView!
+    @IBOutlet weak var numberOfSelectedGenresLabel: UILabel!
     var genres = [Genre]()
     let apiClient = Factory.createApiClient()
     var repository = Factory.createRepository()
@@ -18,8 +19,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
     var user = User.Fox
     var genresSelectedCount = 0
     let genresLimit = 2
-    @IBOutlet weak var numberOfSelectedGenresLabel: UILabel!
-    
+    var selectedindexPaths = [Int]()
     var hasNextPage: Bool = true {
         didSet {
             self.page += 1
@@ -29,6 +29,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        genreTableView.allowsSelection = false
         genreTableView.delegate = self
         genreTableView.dataSource = self
 
@@ -62,8 +63,24 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
         
         // Assign the indexPath to the button's tag so the genre selected can be retreived when the button is tapped
         cell.loveButton.tag = indexPath.row
+        
+        if selectedindexPaths.contains(indexPath.row) {
+            selectImageButton(button: cell.loveButton)
+        } else {
+            deselectImageButton(button: cell.loveButton)
+        }
 
         return cell
+    }
+    
+    func selectImageButton(button: UIButton) {
+        button.setImage(UIImage(named: "loveSelected"), for: .normal)
+        button.isSelected = true
+    }
+    
+    func deselectImageButton(button: UIButton) {
+        button.setImage(UIImage(named: "loveDeselected"), for: .normal)
+        button.isSelected = false
     }
     
     func shouldFetchNextPage(indexPath: IndexPath) -> Bool {
@@ -80,8 +97,7 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
         let indexPath = IndexPath(row: loveButton.tag, section: 0)
         
         if loveButton.isSelected {
-            loveButton.setImage(UIImage(named: "loveDeselected"), for: .normal)
-            loveButton.isSelected = false
+            deselectImageButton(button: loveButton)
             removeSelectedGenre(with: indexPath)
         } else {
             
@@ -92,19 +108,20 @@ class GenreViewController: UIViewController , UITableViewDelegate, UITableViewDa
                 return
             }
             
-            loveButton.setImage(UIImage(named: "loveSelected"), for: .normal)
-            loveButton.isSelected = true
+            selectImageButton(button: loveButton)
             saveSelectedGenre(with: indexPath)
         }
     }
     
     func saveSelectedGenre(with indexPath: IndexPath) {
+        selectedindexPaths.append(indexPath.row)
         genresSelectedCount += 1
         updateNumberOfSelectedGenresLabel()
         selectedGenres[indexPath.row] = genres[indexPath.row].id
     }
     
     func removeSelectedGenre(with indexPAth: IndexPath) {
+        selectedindexPaths = selectedindexPaths.filter { $0 != indexPAth.row }
         genresSelectedCount -= 1
         updateNumberOfSelectedGenresLabel()
         selectedGenres.removeValue(forKey: indexPAth.row)

@@ -11,6 +11,7 @@ import UIKit
 class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
     @IBOutlet weak var movieTableView: UITableView!
+    @IBOutlet weak var numberOfSelectedMoviesLabel: UILabel!
     var movies = [Movie]()
     var selectedMovies = [Int: Int]()
     let apiClient = Factory.createApiClient()
@@ -19,7 +20,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var user = User.Fox
     var moviesSelectedCount = 0
     let moviesLimit = 2
-    @IBOutlet weak var numberOfSelectedMoviesLabel: UILabel!
+    var selectedindexPaths = [Int]()
     var hasNextPage: Bool = true {
         didSet {
             self.page += 1
@@ -28,6 +29,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        movieTableView.allowsSelection = false
         movieTableView.delegate = self
         movieTableView.dataSource = self
         
@@ -63,8 +65,24 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.id = movies[indexPath.row].id
         // Assign the indexPath to the button's tag so the movie selected can be retreived when the button is tapped
         cell.loveButton.tag = indexPath.row
-
+        
+        if selectedindexPaths.contains(indexPath.row) {
+            selectImageButton(button: cell.loveButton)
+        } else {
+            deselectImageButton(button: cell.loveButton)
+        }
+        
         return cell
+    }
+    
+    func selectImageButton(button: UIButton) {
+        button.setImage(UIImage(named: "loveSelected"), for: .normal)
+        button.isSelected = true
+    }
+    
+    func deselectImageButton(button: UIButton) {
+        button.setImage(UIImage(named: "loveDeselected"), for: .normal)
+        button.isSelected = false
     }
     
     func shouldFetchNextPage(indexPath: IndexPath) -> Bool {
@@ -80,8 +98,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let indexPath = IndexPath(row: loveButton.tag, section: 0)
         
         if loveButton.isSelected {
-            loveButton.setImage(UIImage(named: "loveDeselected"), for: .normal)
-            loveButton.isSelected = false
+            deselectImageButton(button: loveButton)
             removeSelectedMovie(with: indexPath)
         } else {
             
@@ -92,19 +109,20 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 return
             }
             
-            loveButton.setImage(UIImage(named: "loveSelected"), for: .normal)
-            loveButton.isSelected = true
+            selectImageButton(button: loveButton)
             saveSelectedMovie(with: indexPath)
         }
     }
     
     func saveSelectedMovie(with indexPath: IndexPath) {
+        selectedindexPaths.append(indexPath.row)
         moviesSelectedCount += 1
         updateNumberOfSelectedActorsLabel()
         selectedMovies[indexPath.row] = movies[indexPath.row].id
     }
     
     func removeSelectedMovie(with indexPAth: IndexPath) {
+        selectedindexPaths = selectedindexPaths.filter { $0 != indexPAth.row }
         moviesSelectedCount -= 1
         updateNumberOfSelectedActorsLabel()
         selectedMovies.removeValue(forKey: indexPAth.row)

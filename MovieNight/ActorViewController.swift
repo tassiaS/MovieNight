@@ -11,6 +11,7 @@ import UIKit
 class ActorViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var actorTableView: UITableView!
+    @IBOutlet weak var numberOfSelectedActorsLabel: UILabel!
     var actors = [Actor]()
     let apiClient = Factory.createApiClient()
     var repository = Factory.createRepository()
@@ -18,16 +19,17 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
     var user = User.Fox
     var actorsSelectedCount = 0
     let actorsLimit = 2
-    @IBOutlet weak var numberOfSelectedActorsLabel: UILabel!
+    var selectedindexPaths = [Int]()
     var hasNextPage: Bool = true {
         didSet {
             self.page += 1
         }
     }
     var page = 1
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        actorTableView.allowsSelection = false
         
         actorTableView.delegate = self
         actorTableView.dataSource = self
@@ -63,7 +65,23 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Assign the indexPath to the button's tag so the actor selected can be retreived when the button is tapped
         cell.loveButton.tag = indexPath.row
         
+        if selectedindexPaths.contains(indexPath.row) {
+            selectImageButton(button: cell.loveButton)
+        } else {
+            deselectImageButton(button: cell.loveButton)
+        }
+        
         return cell
+    }
+    
+    func selectImageButton(button: UIButton) {
+        button.setImage(UIImage(named: "loveSelected"), for: .normal)
+        button.isSelected = true
+    }
+    
+    func deselectImageButton(button: UIButton) {
+        button.setImage(UIImage(named: "loveDeselected"), for: .normal)
+        button.isSelected = false
     }
     
     func shouldFetchNextPage(indexPath: IndexPath) -> Bool {
@@ -80,8 +98,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
         let indexPath = IndexPath(row: loveButton.tag, section: 0)
         
         if loveButton.isSelected {
-            loveButton.setImage(UIImage(named: "loveDeselected"), for: .normal)
-            loveButton.isSelected = false
+            deselectImageButton(button: loveButton)
             removeSelectedActor(with: indexPath)
         } else {
             
@@ -92,19 +109,20 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
                 return
             }
 
-            loveButton.setImage(UIImage(named: "loveSelected"), for: .normal)
-            loveButton.isSelected = true
-             saveSelectedActor(with: indexPath)
+            selectImageButton(button: loveButton)
+            saveSelectedActor(with: indexPath)
         }
     }
     
     func saveSelectedActor(with indexPath: IndexPath) {
+        selectedindexPaths.append(indexPath.row)
         actorsSelectedCount += 1
         updateNumberOfSelectedActorsLabel()
         selectedActors[indexPath.row] = actors[indexPath.row].id
     }
     
     func removeSelectedActor(with indexPAth: IndexPath) {
+        selectedindexPaths = selectedindexPaths.filter { $0 != indexPAth.row }
         actorsSelectedCount -= 1
         updateNumberOfSelectedActorsLabel()
         selectedActors.removeValue(forKey: indexPAth.row)
@@ -128,7 +146,7 @@ class ActorViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         let shouldPerformSegue = actorsSelectedCount == actorsLimit
         
-        if !shouldPerformSegue{
+        if !shouldPerformSegue {
             let alert = Alert.create(alertTitle: "Hey =)", message: "Please, select \(actorsLimit) actors before going to next page", actionTitle: "Ok")
             present(alert, animated: true, completion: nil)
         }

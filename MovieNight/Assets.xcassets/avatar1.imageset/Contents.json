@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "fox.png",
+      "filename" : "fox-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "fox-1.png",
+      "filename" : "fox-2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "fox-2.png",
+      "filename" : "fox.png",
       "scale" : "3x"
     }
   ],
