@@ -20,6 +20,7 @@ class ResultTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.allowsSelection = false
         self.setLoadingScreen()
         loadData()
     }
@@ -56,7 +57,6 @@ class ResultTableViewController: UITableViewController {
         loadingView.addSubview(self.loadingLabel)
         
         self.tableView.addSubview(loadingView)
-        
     }
     
     func loadData() {
